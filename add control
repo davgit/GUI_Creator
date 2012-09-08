@@ -1,0 +1,55 @@
+add_control(pos){
+	static count=0,t:=[]
+	if pos.reset
+	return count:=0,t:=[]
+	static conlist:={DateTime:"longdate",MonthCal:"",Tab:"Tab|Tab",Progress:100,TreeView:""}
+	tab:=intab(pos)
+	if (Tab&&pos.Control="tab")
+	return m("Tabs can not be a part of other tabs.")
+	for a,b in constants("pos")
+	if pos[a]!=""
+	position.=a pos[a] " "
+	if pos.options
+	position.=pos.options
+	position.=xg({settings:"//Control_Borders"}).text?" Border ":""
+	if pos.Font
+	Gui,Font,% compilefont(pos),% pos.font
+	if pos.tabnum&&pos.tab=""
+	tab:=t[count]
+	if tab
+	Gui,Tab,% pos.tabnum,% t[tab]
+	if (pos.type!="TreeView")
+	value:=pos.value?pos.value:conlist[pos.type],value:=value?value:pos.type
+	pos.value:=value
+	if (pos.type="Picture")
+	if !FileExist(pos.value){
+		FileSelectFile,file
+		if ErrorLevel
+		return
+		pos.value:=file,value:=file
+	}
+	if (RegExMatch(pos.type,"i)(ComboBox|ListView)"))
+	WinGet,bcl,ControlListHWND,% hwnd("h1")
+	if (RegExMatch(pos.type,"i)(DropDownList|ddl|ComboBox)")&&xg({settings:"//Disable_Lists"}).text)
+	position.=" Disabled"
+	if (pos.type="ListView")
+	position.=" -Multi"
+	Gui,Add,% pos.type,%position% hwndhwnd,% value
+	if c_options("Snap_to_Grid")
+	p:=getconpos(hwnd),checkmove(hwnd,"","",round(p.w,-1))
+	sleep,1
+	Gui,Tab
+	Gui,Font
+	WinGet,cl,ControlListHWND,% hwnd("h1")
+	if (RegExMatch(pos.type,"i)(ComboBox|ListView)"))
+	married(Trim(RegExReplace(cl,bcl),"`n"))
+	if (pos.Control="tab")
+	count++,t[hwnd]:=count,t[count]:=hwnd
+	pos["hwnd"]:=hwnd+0
+	if pos.Control
+	pos["type"]:=pos.control
+	guixmladd(pos,tab)
+	if pos.Control="TreeView"
+	TreeView()
+	return hwnd
+}

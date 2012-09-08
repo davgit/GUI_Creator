@@ -1,0 +1,31 @@
+gui(x=""){
+	;auto_version
+	if x=1
+	return version
+	Gui,Destroy
+	if !FileExist("tile.bmp"){
+		SplashTextOn,200,150,Downloading tile image,Please wait
+		URLDownloadToFile,http://www.autohotkey.net/~maestrith/guicreator/tile.bmp,tile.bmp
+		SplashTextOff
+	}
+	OnMessage(0x136,"WM_CTLCOLORDLG")
+	OnMessage(5,"setguipos")
+	OnMessage(0x232,"snap")
+	SysGet,border,32
+	SysGet,caption,4
+	SysGet,men,55
+	pos:={border:border,caption:caption,status:h,ymin:caption+Border}
+	var({pos:pos})
+	for a,b in {3:"tab",2:"groupbox",1:"control",4:"show"}
+	xadd("gui",b,"")
+	Gui,+Resize +hwndhwnd
+	hwnd(1,hwnd)
+	hide:=x=2?"Hide":""
+	Gui,Show,w500 h500 %hide%
+	hotkey_on()
+	return
+	GuiClose:
+	xsave("settings")
+	ExitApp
+	return
+}

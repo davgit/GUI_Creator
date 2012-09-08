@@ -1,0 +1,6 @@
+test_gui(){
+	program:=export(1)
+	FileDelete,temp.ahk
+	FileAppend,%program%,temp.ahk
+	run,temp.ahk
+}

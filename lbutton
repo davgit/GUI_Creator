@@ -1,0 +1,40 @@
+lbutton(){
+	lbutton:
+	MouseGetPos,x,y,win,con,2
+	sleep,1
+	if (InStr(Control,"tab")||con="")
+	MouseClick,Left
+	married(con),Control:=[]
+	if (win!=hwnd(1)){
+		MouseClick,Left
+		return
+	}
+	if !con
+	return select()
+	Sleep,10
+	while,GetKeyState("LButton","P"){
+		MouseGetPos,xx,yy
+		if (Abs(x-xx)>2||Abs(y-yy)>2)
+		if GetKeyState("Shift","P")
+		return resize(con,x,y)
+		else
+		return move(con,x,y)
+	}
+	if GetKeyState("Shift","P")
+	selected_controls(con),showhighlight()
+	else if GetKeyState("Control","P"){
+		sel:=selected_controls()
+		if sel[con]{
+			for a,b in sel
+			if (a!=con)
+			Control[a]:=a
+			selected_controls(Control)
+		}
+		else
+		selected_controls(Con)
+		showhighlight()
+	}
+	else
+	Control[con]:=con,selected_controls(Control),showhighlight()
+	return
+}

@@ -1,0 +1,40 @@
+undo(reset=""){
+	static undo:=[]
+	if reset.reset
+	return undo:=[]
+	if reset.get
+	return undo
+	con:=xget("gui"),all:=getallpos(hwnd(1)),tf:=[],grp:=sn(con,"//*[@type='Groupbox']"),pos:=var("pos"),xywh:=["x","y","w","h"]
+	if grp.length
+	while,cons:=grp.item[A_Index-1]
+	{
+		f:=sn(cons,"*")
+		while,incon:=f.item[A_Index-1]
+		{
+			if ssn(incon,"@tabnum")
+			back:=ssn(incon,"../.."),back.appendchild(incon)
+			else if ssn(incon,"@type").text="Groupbox"
+			back:=ssn(con,"//gui/groupbox"),back.appendchild(incon)
+			else
+			back:=ssn(con,"/gui/" incon.nodename),back.appendchild(incon)
+		}
+	}
+	group:=sn(con,"//*[@type='Groupbox']")
+	while,val:=group.item[A_Index-1]
+	for a in inside(ssn(val,"@hwnd").text){
+		if ssn(val,"@tabnum").text=ssn(con,"//*[@hwnd='" a "']").selectsinglenode("@tabnum").text
+		val.appendchild(ssn(con,"//*[@hwnd='" a "']"))
+	}
+	font:=sn(con,"//@type")
+	while,f:=font.item[A_Index-1].selectsinglenode("..")
+	for a,b in xywh
+	f.SetAttribute(b,all[ssn(f,"@hwnd").text,b])
+	winpos:=getwinpos(x,y,w,h,hwnd(1))
+	show:=ssn(con,"//gui/show")
+	for a,b in {x:x,y:y,w:w,h:h}
+	show.SetAttribute(a,b)
+	time:=A_Hour A_Min A_Sec A_MSec
+	if A_ThisLabel not in undo,redo
+	undo[time]:=export(1)
+	list:=sn(con,"//*[@font!='']"),flist:=[]
+}

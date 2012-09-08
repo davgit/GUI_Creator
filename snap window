@@ -1,0 +1,14 @@
+snap_window_to_grid(){
+	p:=var("pos")
+	getwinpos(x,y,w,h,hwnd(1))
+	w:=round(w,-1)
+	h:=round(h,-1)
+	w+=(p.Border*2)+1,h+=(p.Border*2)+p.Caption+1
+	WinMove,% hwnd("h1"),,,,% w,% h
+}
+snap(){
+	if c_options("Snap_to_Grid")
+	snap_window_to_grid()
+	Hotkey,IfWinActive,% hwnd("h1")
+	Hotkey,*LButton,LButton,On
+}

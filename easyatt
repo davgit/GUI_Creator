@@ -1,0 +1,6 @@
+easyatt(node){
+	list:=[],nodes:=sn(node,"@*")
+	while,n:=nodes.item[A_Index-1]
+	list[n.nodename]:=n.text
+	return list
+}

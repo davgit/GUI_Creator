@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings>
+	<Nag>1</Nag>
+	<Quick_Options>
+		<Grid>1</Grid>
+		<Auto_load_last_project>1</Auto_load_last_project>
+		<Snap_to_Grid>1</Snap_to_Grid>
+		<Control_Borders>0</Control_Borders>
+		<Add_Spaces_to_Output>1</Add_Spaces_to_Output>
+		<Disable_lists>1</Disable_lists>
+		<Disable_Lists>0</Disable_Lists>
+	</Quick_Options>
+	<Create>
+		<Button>b</Button>
+		<Checkbox>+c</Checkbox>
+		<Tab>t</Tab>
+		<Edit>e</Edit>
+		<Groupbox>g</Groupbox>
+		<Combobox>c</Combobox>
+		<ListView>z</ListView>
+		<DropDownList>d</DropDownList>
+	</Create>
+	<Hotkeys>
+		<Snap_Window_to_Grid>+s</Snap_Window_to_Grid>
+	</Hotkeys>
+	<Offset x="2" y="0"></Offset>
+	<EditControl x="1240" y="104"></EditControl>
+	<Default>
+	</Default>
+	<font bold="0" color="128" italic="0" name="Segoe Print" size="10" strikeout="0" underline="0"></font>
+	<lastopen file="J:\Script Writer\project\GUI Creator\screenshot.xml"></lastopen>
+</settings>

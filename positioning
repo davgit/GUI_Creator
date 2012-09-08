@@ -1,0 +1,42 @@
+align_vertically(){
+	right:=var("right")
+	if !right.Control
+	minx:=posinfo().y.minindex()
+	else
+	minx:=getconpos(right.Control).y
+	for a,b in selected_controls()
+	Checkmove(a,,minx)
+	showhighlight(),Redraw()
+}
+align_horizontally(){
+	right:=var("right")
+	if !right.Control
+	minx:=posinfo().x.minindex()
+	else
+	minx:=getconpos(right.Control).x
+	for a,b in selected_controls()
+	Checkmove(a,minx)
+	showhighlight(),Redraw()
+}
+align_selected_to_grid(){
+	for a,b in selected_controls()
+	p:=getconpos(a),g:=grid(p.x,p.y,1),checkmove(a,g.x,g.y)
+	showhighlight()
+}
+posinfo(){
+	x:=[],y:=[],totalheight:=0,totalwidth:=0,w:=[],h:=[],order:=[]
+	for a,b in selected_controls(){
+		p:=getconpos(a)
+		x[p.x,a]:=p
+		y[p.y,a]:=p
+		totalheight+=p.h
+		totalwidth+=p.w
+	}
+	for a in x
+	for b,c in x[a]
+	w[c.x+c.w,b]:=c
+	for a in y
+	for b,c in y[a]
+	h[c.y+c.h,b]:=c
+	return {x:x,y:y,w:w,h:h,tw:totalwidth,th:totalheight}
+}

@@ -1,0 +1,9 @@
+married(ByRef x=""){
+	static married:=[]
+	if !x
+	return married
+	if !InStr(x,"`n")
+	return x:=married[x]?married[x]:x+0
+	StringSplit,c,x,`n
+	married[c2+0]:=c1+0
+}

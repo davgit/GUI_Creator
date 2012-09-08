@@ -1,0 +1,15 @@
+inside(minx,miny="",maxx="",maxy=""){
+	inside:=[],win:=hwnd(1),controls:=getallpos(win),p:=[],x:="x",y:="y",cgp:=getconpos(minx)
+	if !miny
+	for a,b in {x:1,y:1,xx:1,yy:1}
+	xy:=SubStr(a,1,1),val:=adjust(cgp[a],cgp[a])[xy],p[xy,val]:=1
+	else
+	p[x,minx]:=1,p[x,maxx]:=1,p[y,miny]:=1,p[y,maxy]:=1
+	for a,b in Controls
+	{
+		ad:=adjust(b.x,b.y)
+		if (ad.x>p.x.minindex()&&ad.x<p.x.maxindex())&&(ad.y>p.y.minindex()&&ad.y<p.y.maxindex())
+		inside[a]:=a
+	}
+	return inside
+}

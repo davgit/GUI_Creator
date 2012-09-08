@@ -1,0 +1,44 @@
+list_editor(list){
+	Gui,46:Destroy
+	Gui,46:+hwndhwnd
+	hwnd(46,hwnd)
+	Gui,46:Add,ListView,w400 h600 Multi -ReadOnly AltSubmit gle,Value
+	for a,b in {delsel:"Delete Selected",addedit:"Add"}
+	{
+		default:=a="addedit"?"Default":""
+		Gui,46:add,Button,g%a% %Default%,%b%
+	}
+	Gui,46:Add,Button,gleup,Update
+	Gui,46:Default
+	Loop,Parse,list,|
+	LV_Add("",A_LoopField)
+	Gui,46:Show
+	return
+	delsel:
+	if A_GuiEvent!=Normal
+	return
+	list:=[]
+	while,rownumber:=LV_GetNext()
+	LV_Delete(rownumber)
+	return
+	addedit:
+	num:=LV_Add("")
+	ControlFocus,SysListView321,% hwnd("h46")
+	LV_Modify(num,"focus")
+	send,{f2}
+	return
+	le:
+	return
+	leup:
+	list:=""
+	Loop,% LV_GetCount()
+	LV_GetText(value,A_Index),list.=value "|"
+	Gui,45:Default
+	Gui,ListView,SysListView322
+	LV_GetText(setting,LV_GetNext(),2)
+	LV_Modify(LV_GetNext(),"",Trim(list,"|"),setting)
+	return
+	46GuiEscape:
+	Gui,46:Destroy
+	return
+}

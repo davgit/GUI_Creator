@@ -1,0 +1,23 @@
+showhighlight(color=0,position=0){
+	list:=[]:=pos:=""
+	gui,99:destroy
+	Gui,99:+LastFound +owner1 +E0x20 -Caption +hwndsh +ToolWindow 
+	var({sh:"ahk_id " sh})
+	WinSet,TransColor,0xF0F0F0 100
+	Gui,99:Color,0xF0F0F0,0xFF
+	color:=0xaaaa00,pos:=getallpos(hwnd(1))
+	WinGetPos, x1, y1, w1, h1,% hwnd("h1")
+	for a,b in selected_controls(){
+		if !a
+		continue
+		Random,color,0x111111,0xffffff
+		if (pos[a].x=""||pos[a].y=""||pos[a].w=""||pos[a].h="")
+		continue
+		Gui, 99:Add, Progress, % "c" color " x" pos[a].x " y" pos[a].y " w" pos[a].w " h" pos[a].h " hwndhwnd", 100
+		list[a]:=hwnd
+	}
+	getwinpos(x,y,w,h,hwnd(1)),p:=var("pos")
+	h:=h+p.Border+p.Caption, w+=p.Border
+	Gui,99:Show,x%x% y%y% w%w% h%h% NoActivate
+	var({high:list})
+}

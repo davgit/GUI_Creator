@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gui>
+	<control><control control="Button" h="23" hwnd="35915926" options="" type="Button" value="Button" w="43" x="18" y="40"></control>
+		<control color="0x800000" control="Checkbox" font="Cambria Math" h="23" hwnd="46728434" options="" size="12" type="Checkbox" value="Checkbox" w="120" x="78" y="40"></control>
+		<control control="ComboBox" h="21" hwnd="73861568" options="" type="ComboBox" value="ComboBox" w="80" x="18" y="70"></control>
+		<control control="DateTime" h="21" hwnd="59769884" options="" type="DateTime" value="longdate" w="240" x="328" y="40"></control>
+		<control control="DropDownList" h="21" hwnd="72157052" options="" type="DropDownList" value="DropDownList" w="120" x="18" y="100"></control>
+		<control color="0x80" control="Edit" font="Segoe Script" g="hello" h="61" hwnd="30280170" options="Multi" size="12" type="Edit" value="Edit" w="107" x="18" y="130"></control>
+		<control control="Hotkey" h="23" hwnd="33360202" options="" type="Hotkey" value="+!q" w="80" x="18" y="200"></control>
+		<control color="0x8080" control="Listbox" font="Franklin Gothic Medium" h="124" hwnd="47122890" options="" size="18" type="Listbox" value="Listbox|1|2|3|4" w="160" x="298" y="290"></control>
+		<control color="" control="ListView" font="Gabriola" h="153" hwnd="46794458" options="" size="16" type="ListView" v="f" value="ListView|set|custom|headers" w="270" x="18" y="240"></control>
+		<control control="MonthCal" h="180" hwnd="51578590" options="4 8 Multi" type="MonthCal" value="MonthCal" w="255" x="18" y="400"></control>
+		<control control="Picture" h="215" hwnd="35261042" options="" type="Picture" value="C:\Users\Public\Pictures\Sample Pictures\Desert.jpg" w="286" x="378" y="70"></control>
+		<control control="Progress" h="16" hwnd="31066666" options="" type="Progress" value="100" w="120" x="468" y="300"></control>
+		<control control="Slider" h="123" hwnd="66912348" options="Invert Vertical" type="Slider" value="Slider" w="40" x="298" y="450"></control>
+		<control color="0xFF0000" control="Treeview" font="Bauhaus ITC" h="84" hwnd="84870286" options="" size="12" type="Treeview" v="asdf" value="" w="240" x="128" y="140"></control>
+		<control control="Button" h="23" hwnd="51251386" options="" type="Button" value="Button" w="43" x="318" y="240"></control>
+		<control control="Picture" h="215" hwnd="18483434" options="" type="Picture" value="C:\Users\Public\Pictures\Sample Pictures\Desert.jpg" w="286" x="888" y="210"></control>
+		<control control="Picture" h="215" hwnd="70254796" options="" type="Picture" value="C:\Users\Public\Pictures\Sample Pictures\Desert.jpg" w="286" x="1238" y="320"></control>
+		<control control="Picture" h="215" hwnd="53609950" options="" type="Picture" value="C:\Users\Public\Pictures\Sample Pictures\Desert.jpg" w="286" x="858" y="600"></control>
+		<control color="0x8080" control="Listbox" font="Franklin Gothic Medium" h="124" hwnd="27394968" options="" size="18" type="Listbox" value="Listbox|1|2|3|4" w="160" x="398" y="670"></control>
+	</control>
+	<groupbox><control control="Groupbox" h="107" hwnd="38603158" options="" type="Groupbox" value="Groupbox" w="110" x="208" y="30">
+			<control color="" control="Radio" font="Corbel" h="23" hwnd="44697328" options="" size="10" type="Radio" value="Radio" w="70" x="228" y="96"></control>
+			<control color="" control="Radio" font="Corbel" h="23" hwnd="54463044" options="" size="10" type="Radio" value="Radio" w="70" x="228" y="50"></control>
+			<control color="" control="Radio" font="Corbel" h="23" hwnd="59442968" options="" size="10" type="Radio" value="Radio" w="70" x="228" y="73"></control></control>
+	</groupbox>
+	<tab><tab control="Tab" h="252" hwnd="59443636" options="" type="Tab" value="Customize|Tab|Values" w="290" x="468" y="320">
+			<tabnum tab="1">
+				<control color="0xFF00FF" control="Text" font="Gabriola" h="43" hwnd="39455206" options="" size="16" tabnum="1" type="Text" value="Controls tabs are remembered" w="201" x="488" y="360"></control></tabnum></tab>
+	</tab>
+	<show h="1018" options="xCenter NA" w="1920" x="-8" y="-8"></show>
+</gui>

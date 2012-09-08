@@ -1,0 +1,156 @@
+xget(doc,xpath="",attribute=""){
+	xml:=xml(doc).xml
+	if !xpath
+	return xml
+	data:=xml.selectsinglenode("//" xpath)
+	if attribute
+	return data.selectsinglenode("@" attribute).text
+	return data.text
+}
+xml(ref="",root="",file=""){
+	static documents:=[]
+	if ref.remove
+	return documents.remove(ref.remove)
+	if !ref
+	return documents
+	file:=file?file:ref ".xml",root:=!root?ref:root
+	if !documents[ref]{
+		doc:=ComObjCreate("MSXML2.DOMDocument"),doc.setProperty("SelectionLanguage","XPath")
+		ifexist %file%
+		doc.load(file)
+		else
+		xml:=doc.createelement(root),doc.appendchild(xml)
+		documents[ref]:={xml:doc,file:file,root:root}
+	}
+	return documents[ref]
+}
+xg(xml){
+	ret:=[]
+	for a,b in xml
+	x:=xml(a).xml.selectsinglenode(b),ret[A_Index]:=x
+	return o:=isobject(ret.2)?ret:x
+}
+style(){
+	xsl := ComObjCreate("MSXML2.DOMDocument")
+	style =
+	(
+	<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+	<xsl:output method="xml" indent="yes" encoding="UTF-8"/>
+	<xsl:template match="@*|node()">
+	<xsl:copy>
+	<xsl:apply-templates select="@*|node()"/>
+	<xsl:for-each select="@*">
+	<xsl:text></xsl:text>
+	</xsl:for-each>
+	</xsl:copy>
+	</xsl:template>
+	</xsl:stylesheet>
+	)
+	xsl.loadXML(style), style:=null
+	return xsl
+}
+xadd(ref,path,value,text="",duplicate=""){
+	doc:=xml(ref).xml,currentpath:=xml(ref).root,batch:=[]
+	StringSplit,path,path,/
+	edit:=doc.selectsinglenode("//" path)
+	if (edit=""||duplicate){
+		check:=doc.SelectSingleNode("//" path)?1:0
+		Loop,Parse,path,/
+		last:=currentpath,bool:=doc.SelectSingleNode(currentpath.="/" A_LoopField)?1:0,batch[A_Index]:={name:A_LoopField,exist:bool,last:last}
+		for a,b in batch
+		if !b.Exist
+		edit:=doc.selectsinglenode(b.last),xml:=doc.createelement(b.name),edit.appendchild(xml)
+		edit:=doc.SelectSingleNode(b.last "/" b.name)
+	}
+	if duplicate&&check=1
+	dup:=doc.SelectSingleNode(batch[path0]last),xml:=doc.CreateElement(path%path0%),dup.AppendChild(xml),edit:=xml
+	if IsObject(value)
+	for a,b in value
+	edit.setattribute(a,b)		
+	else
+	edit.text:=value
+	if Text!=""
+	edit.text:=Text
+	return edit
+}
+guixmladd(info,tab){
+	n:=[]
+	xml:=xget("gui")
+	for a,b in info
+	if a not in tab,tabnum
+	n[a]:=b
+	if tab
+	{
+		t:=xg({gui:"//*[@hwnd='" tab "']"})
+		if !newtab:=ssn(t,"tabnum[@tab='" info.tabnum "']")
+		newtab:=xml.createelement("tabnum"),t.appendchild(newtab),newtab.setattribute("tab",info.tabnum)
+		new:=xml.createelement("control"),newtab.appendchild(new)
+		for a,b in info
+		if a!=tab
+		new.setattribute(a,b)
+		return
+	}
+	if info.type="Tab"
+	{
+		xx("gui","tab/tab",n,,{hwnd:info.hwnd})
+		return
+	}
+	if info.type="Groupbox"
+	return xx("gui","groupbox/control",n,,{hwnd:info.hwnd})
+	if !Tab
+	xx("gui","control/control",n,,{hwnd:info.hwnd})
+}
+ssn(xml,node){
+	return xml.selectsinglenode(node)
+}
+xx(doc,path,value,text="",find=""){
+	main:=xml(doc)
+	for a,b in Main
+	%a%:=b
+	pat:="//" root,root:=xml.selectsinglenode("/*")
+	for a,b in find
+	if found:=ssn(xml,"//" path "[@" a "='" b "']"){
+		for a,b in value
+		found.setattribute(a,b)
+		return found
+	}
+	Loop,Parse,path,/
+	{
+		pat.="/" A_LoopField
+		bool:=ssn(xml,pat)?1:0
+		if bool
+		{
+			last:=ssn(xml,pat)
+			lastpath:=A_LoopField
+			continue
+		}
+		if (bool=0 && A_Index=1)
+		last:=xml.createelement(A_LoopField),root.appendchild(last)
+		if (bool=0 && A_Index>1)
+		new:=xml.createelement(A_LoopField),last.appendchild(new)
+		last:=ssn(xml,pat)
+		lastpath:=A_LoopField
+	}
+	stringsplit,path,pat,/
+	prev:=path0>1?path0-1:1
+	if bool && find
+	dup:=xml.createelement(lastpath),new:=ssn(xml,"//" path%prev%),new.appendchild(dup),last:=dup
+	for a,b in value
+	last.setattribute(a,b)
+	if text
+	last.text:=text
+	return last
+}
+sn(xml,node){
+	return xml.selectnodes(node)
+}
+xsave(file=""){
+	if file{
+		b:=xget(file)
+		file:=xml()[file].file?xml()[file].file:file
+		b.transformNodeToObject(style(),b),b.save(file)
+	}
+	else
+	for a,b in xml()
+	b.xml.transformNodeToObject(style(),b.xml),b.xml.save(b.file)
+}

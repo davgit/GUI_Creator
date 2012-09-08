@@ -1,0 +1,5 @@
+getwinpos(ByRef x,ByRef y,ByRef w,ByRef h,win){
+	WinGetPos,x,y,,,ahk_id %win%
+	VarSetCapacity(size,16,0),DllCall("user32\GetClientRect","uint",win,"uint",&size),w:=NumGet(size,8),h:=NumGet(size,12)
+	return "x" x " y" y " w" w " h" h
+}

@@ -1,0 +1,11 @@
+compilefont(control){
+	for a,b in control{
+		if (a="size"&&b)
+		sizeval.=" s" b
+		if (a="color"&&b)
+		sizeval.=" c" b
+		if (RegExMatch(a,"i)(bold|italic|strikeout|underline)")&&b=1)
+		sizeval.=" " a
+	}
+	return Trim("norm" sizeval)
+}

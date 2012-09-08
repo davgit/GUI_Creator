@@ -1,0 +1,6 @@
+attlist(node){
+	val:=[]
+	while,v:=node.item[A_Index-1]
+	val[v.text]:=v.text
+	return val
+}

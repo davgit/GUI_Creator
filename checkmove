@@ -1,0 +1,7 @@
+checkmove(Control,x="",y="",w="",h=""){
+	adjust(x,y)
+	for a,b in constants("pos")
+	if (%a%!="")
+	position.=a %a% " "
+	GuiControl,movedraw,%control%,%position%
+}

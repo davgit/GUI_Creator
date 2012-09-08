@@ -1,0 +1,39 @@
+resize(con,x,y){
+	offset:=[],grid(x,y)
+	Gui,99:Destroy
+	cp:=getconpos(con),offset["w"]:=cp.w,offset["h"]:=cp.h
+	while,GetKeyState("LButton","P"){
+		MouseGetPos,xx,yy
+		g:=grid(xx,yy)
+		if (lastx=xx&&lasty=yy)
+		continue
+		nx:=xx-x+offset.w,ny:=yy-y+offset.h
+		if GetKeyState("Control","P")
+		ny:=offset.h*((xx-x)+offset.w)/offset.w
+		if selected_controls()[con]
+		for a,b in selected_controls()
+		checkmove(a,"","",nx,ny)
+		else
+		checkmove(con,"","",nx,ny)
+		lastx:=xx,lasty:=yy
+	}
+	showhighlight(),undo(),Redraw()
+}
+Resize_Width_to_Grid(){
+	right:=var("right"),sel:=selected_controls()
+	for a,b in sel
+	g:=getconpos(a),checkmove(a,,,round(g.w,-1))
+	g:=getconpos(right.control),checkmove(right.control,,,,round(g.h,-1)),showhighlight()
+}
+Resize_Height_to_Grid(){
+	right:=var("right"),sel:=selected_controls()
+	for a,b in sel
+	g:=getconpos(a),checkmove(a,,,,round(g.h,-1))
+	g:=getconpos(right.control),checkmove(right.control,,,,round(g.h,-1)),showhighlight()
+}
+Resize_Width_and_Height_to_Grid(){
+	right:=var("right"),sel:=selected_controls()
+	for a,b in sel
+	g:=getconpos(a),checkmove(a,,,round(g.w,-1),round(g.h,-1))
+	g:=getconpos(right.control),checkmove(right.control,,,round(g.w,-1),round(g.h,-1)),showhighlight()
+}

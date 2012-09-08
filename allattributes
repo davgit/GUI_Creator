@@ -1,0 +1,9 @@
+allattributes(doc,path){
+	values:=[]
+	doc:=xml(doc).xml
+	main:=ssn(doc,path)
+	list:=sn(main,"@*")
+	while,value:=list.item[A_Index-1]
+	values[value.nodename]:=value.text
+	return values
+}

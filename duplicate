@@ -1,0 +1,63 @@
+copy_width(){
+	right:=var("right")
+	if !right.Control
+	exit m("You must right click on the control you wish to copy the values from")
+	con:=getconpos(right.control)
+	for a,b in selected_controls()
+	checkmove(a,,,con.w)
+	showhighlight(),Redraw()
+}
+copy_height(){
+	right:=var("right")
+	con:=getconpos(right.control)
+	if !right.Control
+	exit m("You must right click on the control you wish to copy the values from")
+	for a,b in selected_controls()
+	checkmove(a,,,,con.h)
+	showhighlight(),Redraw()
+}
+copy_height_and_width(){
+	copy_width(),copy_height()
+}
+duplicate_selected(){
+	sel:=selected_controls(),all:=getallpos(hwnd(1)),gui:=xget("gui"),pi:=posinfo(),type:=sn(gui,"//*[@type]")
+	offset:=pi.w.maxindex()-pi.x.minindex()+10
+	while,node:=type.item[A_Index-1]
+	{
+		t:=ssn(node,"@type").text
+		hwnd:=ssn(node,"@hwnd").text
+		if !sel[hwnd]
+		continue
+		ea:=easyatt(node)
+		g:=grid(ea.x+offset,0,1),adj:=adjust(g.x,ea.y),ea.x:=adj.x,ea.y:=adj.y
+		hwnd:=add_control(ea)
+	}
+}
+copy_selected(){
+	gui:=xget("gui"),type:=sn(gui,"//*[@type]"),list:=[],sel:=selected_controls(),pi:=posinfo()
+	var({minx:pi.x.minindex(),miny:pi.y.minindex()})
+	while,node:=type.item[A_Index-1]
+	{
+		t:=ssn(node,"@type").text
+		hwnd:=ssn(node,"@hwnd").text
+		if !sel[hwnd]
+		continue
+		list[A_Index]:=easyatt(node)
+	}
+	var({coppied:list})
+}
+paste_selected(){
+	right:=var("right")
+	minx:=var("minx"),miny:=var("miny")
+	if (A_ThisLabel="paste_selected")
+	MouseGetPos,x,y
+	else
+	x:=right.x,y:=right.y
+	for a,b in var("coppied"){
+		bx:=b.x,by:=b.y
+		offx:=b.x-minx+x,offy:=b.y-miny+y,grid(offx,offy),adjust(offx,offy)
+		b.x:=offx,b.y:=offy
+		add_control(b)
+		b.x:=bx,b.y:=by
+	}
+}

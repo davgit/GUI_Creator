@@ -1,0 +1,12 @@
+setguipos(shape="",a="",b="",hwnd=""){
+	offsets:=var("offsets"),getwinpos(xx,yy,ww,hh,hwnd)
+	for a,b in offsets[A_Gui]{
+		for c,d in b
+		if c in w,x
+		list.=c ww-d " "
+		else if c in h,y
+		list.=c hh-d " "
+		GuiControl,%A_Gui%:MoveDraw,%a%,%list%
+		list:=""
+	}
+}

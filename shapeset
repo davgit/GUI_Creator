@@ -1,0 +1,16 @@
+shapeset(num,shape,hwnd){
+	static controls:=[]
+	Gui,%num%:Show,Hide
+	getwinpos(xx,yy,ww,hh,hwnd),list:=getallpos(hwnd),pos:=var("pos")
+	for a,b in shape
+	loop,parse,b
+	{
+		ControlGet,con,hwnd,,%a%, ahk_id%hwnd%
+		if A_LoopField in x,w
+		coord:=A_LoopField="x"?ww+pos.border+pos.border:ww
+		if A_LoopField in y,h
+		coord:=A_LoopField="y"?hh+pos.caption+pos.border:hh
+		controls[num,con,A_LoopField]:=abs(coord-list[con,A_LoopField])
+	}
+	var({offsets:controls})
+}

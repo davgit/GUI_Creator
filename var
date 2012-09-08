@@ -1,0 +1,9 @@
+var(x=""){
+	static list:=[]
+	if !x
+	return list
+	if !IsObject(x)
+	return list[x]
+	for a,b in x
+	list[a]:=b
+}

@@ -1,0 +1,57 @@
+constants(x=""){
+	static allcon:=[]
+	static constant:={info:{value:"Name of control",g:"Target label to trigger",v:"Variable to associate with this control",x:"Control Position X",y:"Control Position Y",w:"Control Width",h:"Control Height"}}
+	static Button:={info:{"-Wrap":"Prevent text wrapping",Default:"Make this button the default selection"}}
+	static Checkbox:={info:{"Check3":"Greyed out Check"}}
+	static DateTime:={info:{Right:"Causes the drop-down calendar to drop down on the right side of the control instead of the left"}
+	,constants:{Range:"Set the range of dates eg(20050101-20120101)"}}
+	static Edit:={info:{Limit:"Restricts the user's input to the visible width of the edit field",Lowercase:"The characters typed by the user are automatically converted to lowercase",Multi:"Makes it possible to have more than one line of text (Can not be combined with password)",Number:"Prevents the user from typing anything other than digits into the field",Password:"Hides the user's input (such as for password entry)",ReadOnly:"Prevents the user from changing the control's contents",Uppercase:"The characters typed by the user are automatically converted to uppercase","-WantCtrlA":"Prevents the user's press of Control-A from selecting all text in the edit control",WantTab:"Causes a tab keystroke to produce a tab character rather than navigating to the next control","-Wrap":"Turns off word-wrapping in a multi-line edit control (re-load required to see effect)","-WantReturn":"Prevents a multi-line edit control from capturing the Enter keystroke"}
+	,constants:{T:"Set tab stops inside a multi-line edit control (numbers only)",R:"Number of Rows (Most likely need a reload)"}}
+	static GroupBox:={info:{Wrap:"Allows for a multi-line heading"},constants:{R:"Set the number of rows available to the GroupBox"}}
+	static ListBox:={info:{AltSubmit:"Alternate Submit",Multi:"Allows more than one item to be selected simultaneously via shift-click and control-click",ReadOnly:"Prevents items from being visibly highlighted when they are selected (but Gui Submit will still store the selected item)",Sort:"Automatically sorts the contents of the list alphabetically"}
+	,constants:{T:"Set tab stops, which can be used to format the text into columns"}}
+	static ListView:={info:{AltSubmit:"Notifies the script for more types of ListView events than normal",Checked:"Provides a checkbox at the left side of each row",Grid:"Provides horizontal and vertical lines to visually indicate the boundaries between rows and columns","-Hdr":"To omit the special top row that contains column titles","-Multi":"Prevents the user from selecting more than one row at a time",NoSortHdr:"Prevents the header from being clickable",NoSort:"Turns off the automatic sorting that occurs when the user clicks a column header","-ReadOnly":"Allow editing of the text in the first column of each row",Sort:"The control is kept alphabetically sorted according to the contents of the first column",SortDesc:"Same as above except in descending order","-WantF2":"Prevents an F2 keystroke from editing the currently focused row"}
+	,constants:{R:"Number of rows (Most likely need a reload)"}}
+	static MonthCal:={info:{Multi:"Multi-select. Allows the user to shift-click or click-drag to select a range of adjacent dates",4:"Display week numbers (1-52) to the left of each row of days",8:"Prevent the circling of today's date within the control",16:"Prevent the display of today's date at the bottom of the control"}
+	,constants:{Range:"Set the range of dates eg(20050101-20120101)"}}
+	static Picture:={info:{"0x4000000":"Force picture to the background"}}
+	static Progress:={info:{"-Smooth":"Displays a length of segments rather than a smooth continuous bar",Vertical:"Makes the bar rise or fall vertically rather than move along horizontally (Requires a variable to work properly)"}
+	,constants:{Background:"Background Color",Range:"Set the range to be something other than 0 to 100 (eg, -4-45)"}}
+	static Radio:={info:{Group:"Start a new group",Checked:"Have this radio checked by default"}}
+	static Slider:={info:{Center:"The thumb (the bar moved by the user) will be blunt on both ends rather than pointed at one end",Invert:"Reverses the control so that the lower value is considered to be on the right/bottom rather than the left/top",Left:"The thumb (the bar moved by the user) will point to the top rather than the bottom",NoTicks:"Omit tickmarks alongside the track",ToolTip:"Creates a tooltip that reports the numeric position of the slider as the user is dragging it",Vertical:"Makes the control slide up and down rather than left and right"}
+	,constants:{Range:"Set the range to be something other than 0 to 100"}}
+	static Tab:={info:{"-Background":"Override the window's custom background color and uses the system's default Tab control color",Buttons:"Creates a series of buttons at the top of the control rather than a series of tabs","-Wrap":"Prevent the tabs from taking up more than a single row",Left:"Align tabs left",Right:"Align tabs right",Bottom:"Align tabs to the bottom"}}
+	static Text:={info:{"-Wrap":"Prevent text wrapping"}}
+	static TreeView:={info:{AltSubmit:"AltSubmit"}}
+	static UpDown:={info:{Horz:"Make's the control's buttons point left/right rather than up/down",Left:"Puts the UpDown on the left side of its buddy rather than the right",Wrap:"Causes the control to wrap around to the other end of its range when the user attempts to go beyond the minimum or maximum","-16":"Cause a vertical UpDown to be isolated","0x80":"Include 0x80 in Options to omit the thousands separator that is normally present between every three decimal digits in the buddy control"}
+	,constants:{Range:"Set the range to be something other than 0 to 100 (eg, -4-45)"}}
+	static Controls:={Button:"Button",Checkbox:"Checkbox",ComboBox:"ComboBox",DateTime:"DateTime",DropDownList:"DropDownList",Edit:"Edit",Groupbox:"Groupbox",Hotkey:"Hotkey",Listbox:"Listbox",ListView:"ListView",MonthCal:"MonthCal",Picture:"Picture",Progress:"Progress",Radio:"Radio",Slider:"Slider",Tab:"Tab",Text:"Text",Treeview:"Treeview",UpDown:"UpDown"}
+	static Quick:={info:{"Snap to Grid":1,"Grid":1,"Add Spaces to Output":1,"Control Borders":1,"Warn Overwrite":1,"Auto load last project":1,"Disable Lists":1}}
+	static Positioning:={info:{"Center In Window":1,"Space Evenly Horizontal":1,"Space Evenly Vertical":1,"Align Selected To Grid":1,"Center Vertically":1,"Center Horizontally":1,"Align Vertically":1,"Align Horizontally":1,"Snap Window to Grid":1}}
+	static Resize:={info:{"Resize Width to Grid":1,"Resize Height to Grid":1,"Resize Width and Height to Grid":1}}
+	static duplicate:={info:{"Copy Width":1,"Copy Height":1,"Duplicate Selected":1,"Copy Height and Width":1}}
+	static menu_edit:={info:{Undo:1,Redraw:1,Font:1,"Set Offsets":1,"Select All":1,Delete:1,Redo:1,"Paste Selected":1,"Copy Selected":1}}
+	static file:={info:{Load:1,Save:1,Export:1,Import:1,New:1,"Copy Code to Clipboard":1,"Import From Clipboard":1,"Test GUI":1}}
+	static menu:={Add:{info:controls},"Quick_Options":quick,Positioning:positioning,Duplicate:duplicate,Edit:menu_edit,File:file,Resize:resize}
+	static Show:={info:{xCenter:"Centers the window horizontally on the screen",yCenter:"Centers the window vertically on the screen",AutoSize:"Resizes the window to accommodate only its currently visible controls",Minimize:"Minimizes the window and activates the one beneath it",Maximize:"Maximizes and activates the window",Restore:"Unminimizes or unmaximizes the window if necessary",NoActivate:"Unminimizes or unmaximizes the window if necessary",NA:"Shows the window without activating it",Hide:"Hides the window and activates the one beneath it"}
+	,constants:{SysMenu:"Omits the system menu and icon in the window's upper left corner",MaximizeBox:"Disables the maximize button in the title bar",MinimizeBox:"Disables the minimize button in the title bar",Disabled:"Disables the window, which prevents the user from interacting with its controls",Resize:"Makes the window resizable and enables its maximize button in the title bar",AlwaysOnTop:"Makes the window stay on top of all other windows",Border:"Provides a thin-line border around the window",Caption:"Remove the caption bar"}}
+	static windowoptions:={"Makes the window stay on top of all other windows":"+AlwaysOnTop","Provides a thin-line border around the window":"+Border","Remove the caption bar":"-Caption","Disables the window, which prevents the user from interacting with its controls":"+Disabled","Disables the maximize button in the title bar":"-MaximizeBox","Disables the minimize button in the title bar":"-MinimizeBox","Makes the window resizable and enables its maximize button in the title bar":"Resize","-SysMenu (minus SysMenu) to omit the system menu and icon in the window's upper left corner":"-SysMenu"}
+	if !x
+	{
+		allcon:={Controls:{},Constants:{},Menu:{},Show:{}}
+		for con in controls
+		allcon.controls.insert(con,%con%)
+		allcon.constants.insert("Constants",constant)
+  		for con,obj in menu
+		allcon.menu.insert(con,obj)
+		for con,obj in {show:show}
+		allcon.show.insert(con,obj)
+		return allcon
+	}
+	static font:={bold:1,italic:1,strikeout:1,underline:1,c:1,size:1,q:1,fontw:1,font:1}
+	static pos:={x:"x",y:"y",w:"w",h:"h"}
+	if x=Pos
+	return pos
+	static constantlist:=["x","y","w","h","g","v","value"]
+	return out:=%x%
+}

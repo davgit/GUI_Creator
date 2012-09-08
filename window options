@@ -1,0 +1,63 @@
+window_options(){
+	static
+	Gui,88:Destroy
+	setguifont(88)
+	Gui,88:+hwndhwnd
+	hwnd(88,hwnd)
+	list:=""
+	static replace:={SysMenu:"-SysMenu",MaximizeBox:"-MaximizeBox",MinimizeBox:"-MinimizeBox",Disabled:"+Disabled",AlwaysOnTop:"+AlwaysOnTop",Border:"+Border",Caption:"-Caption",Resize:"+Resize"}
+	maininfo:=xg({gui:"//show"}),list.=ssn(maininfo,"@options").text,list.=" " ssn(maininfo,"@show").text
+	show:=xg({constants:"//Show/show"})
+	for b,a in {constants:"options",info:"info"}
+	{
+		%a%:=sn(show,b "/*")
+		rows:=%a%.length
+		Gui,88:Add,ListView,r%rows% w600 Checked,Set|Value|Description
+		Gui,88:Default
+		while,v:=%a%.item[A_Index-1]{
+			value:=ssn(v,"@value").text
+			newval:=replace[value]?replace[value]:value
+			check:=InStr(list,value)?"Check":""
+			LV_Add(check,"",newval,ssn(v,"@desc").text)
+		}
+		loop,3
+		LV_ModifyCol(A_Index,"autohdr")
+	}
+	edits:={1:"Window Title",2:"Window Number"}
+	for b,a in edits
+	{
+		Gui,Add,Text,xm,%a%:
+		text:=A_Index=1?xg({gui:"//show/@title"}).text:xg({gui:"//show/@number"}).text
+		number:=b=2?"number Limit2 w100":"w300"
+		Gui,Add,Edit,gwov x+0 %number%,%text%
+	}
+	Gui,Add,Button,gwou Default xm,Update
+	Gui,88:Show,,Window Options
+	;t("needs window number and window name...and some other options if you get to it like delimeter and owner...")
+	return
+	wou:
+	options:=show:="",s:=xg({gui:"//show"})
+	Gui,88:Default
+	Gui,88:listview,SysListView321
+	rownumber=0
+	while,RowNumber:=LV_GetNext(RowNumber,"C")
+	lv_gettext(value,rownumber,2),options.=value " "
+	Gui,88:listview,SysListView322
+	rownumber=0
+	while,RowNumber:=LV_GetNext(RowNumber,"C")
+	lv_gettext(value,rownumber,2),show.=value " "
+	s.SetAttribute("options",options),s.SetAttribute("show",show)
+	return
+	wov:
+	s:=xg({gui:"//show"})
+	ControlGetFocus,focus,% hwnd("h88")
+	if (focus="Edit1")
+	s.SetAttribute("title",A_GuiControl)
+	if (focus="Edit2")
+	s.SetAttribute("number",A_GuiControl)
+	Gui,88:Destroy
+	return
+	88GuiEscape:
+	Gui,88:Destroy
+	return
+}

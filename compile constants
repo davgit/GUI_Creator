@@ -1,0 +1,20 @@
+compile_constants(){
+	doc:=xget("Constants")
+	first:=doc.SelectSingleNode("//Constants")
+	con:=doc.createelement("Constants"),first.appendchild(con)
+	for a,b in constants(){
+		main:=doc.CreateElement(a),con.AppendChild(main)
+		for c,d in b{
+			i:=doc.createelement(c),main.AppendChild(i)
+			for e,f in d{
+ 				j:=doc.createelement(clean(e)),i.AppendChild(j)
+				for g,h in f
+				k:=doc.createelement("value"),j.AppendChild(k),k.SetAttribute("value",g),k.SetAttribute("desc",h)
+			}
+		}
+	}
+	doc.transformNodeToObject(style(),doc)
+	root:=ssn(doc,"//Constants/info")
+	for a,b in ["x","y","w","h","v","g"]
+	child:=ssn(root,"*[@value='" b "']"),root.AppendChild(child)
+}

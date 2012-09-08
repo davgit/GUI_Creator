@@ -1,0 +1,9 @@
+selected_controls(list=""){
+	static save:=[]
+	if IsObject(list)
+	return save:=list
+	if !list
+	return save
+	if !IsObject(list)
+	save[list]:=list
+}

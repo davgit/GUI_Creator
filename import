@@ -1,0 +1,84 @@
+import(program=""){
+	doc:=xget("Constants"),const:=doc.SelectSingleNode("//Constants/info"),attributes:=attlist(const.SelectNodes("*/@value")),controls:=constants("controls")
+	if !program
+	{
+		FileSelectFile,filename,,,,*.ahk
+		FileRead,program,%filename%
+		if ErrorLevel
+		return
+	}
+	reset(),gui(2)
+	Loop,Parse,program,`n,`r`n
+	{
+		RegExReplace(A_LoopField,",","",count),search:=""
+		Loop,% Count
+		search.=",(.*)"
+		RegExMatch(A_LoopField,"O)" search,v)
+		Loop,% Count
+		if RegExMatch(v.1,"(.*):(.*)",win)
+		number:=win1?Trim(win1):number,action:=win2
+		else if v.1
+		action:=v.1
+		info:=v.3?trim(v.3):""
+		if InStr(action,"tab")
+		tabnum:=v.2,tab:=v.3
+		if InStr(action,"font")
+		if !v.3
+		style:="",font:=""
+		else
+		font:=v.3,style:=v.2
+		if (action="add"){
+			vv:=constants("Controls")[v.2]
+			con:=doc.SelectSingleNode("//" controls[vv]),option:=attlist(con.SelectNodes("info/*/@value")),c:=attlist(con.SelectNodes("constants/*/@value")),cc:=attlist(const.SelectNodes("*/@value")),pos:=[]
+			Loop,Parse,info,%A_Space%
+			{
+				if option[A_LoopField]{
+					options.=option[A_LoopField] " "
+					continue
+				}
+				for c,d in {c:c,cc:cc}
+				for a,b in d
+				if RegExMatch(A_LoopField,"iA)" a "(.*)\b",found)
+				pos[a]:=found1
+			}
+			if Style
+			splitfont(style,pos),pos["font"]:=font
+			for a,b in {options:Trim(options),control:trim(vv),value:trim(v.4),type:trim(vv)}
+			pos[a]:=b
+			if tabnum
+			pos["tab"]:=tab,pos["tabnum"]:=tabnum
+			add_control(pos)
+			options=
+		}
+		if (action="show"){
+			where:=v.2,list:=[],pos:=[],option:="",ll:="",title:=info
+			nodes:=compilenodes(sn(xg({constants:"//Show/show/constants"}),"*/@value"))
+			show1:=xg({constants:"//Show/show/info"})
+			v:=sn(show1,"*/@value")
+			while,q:=v.item[A_Index-1].text
+			list[q]:=q
+			Loop,Parse,where,%A_Space%
+			if list[A_LoopField]
+			options.=list[A_LoopField] " "
+			for a,b in nodes
+			ll.=a "|"
+			if RegExMatch(program,"i)(.*)(" trim(ll,"|") ")",found)
+			for a,b in nodes
+			if InStr(found,a)
+			show.=a " "
+			for a,b in {show:show,options:options,number:number,title:title}
+			pos[a]:=b
+			for a,b in constants("show")
+			if InStr(A_LoopField,b)
+			so.=b " "
+			for a,b in constants("pos")
+			if RegExMatch(A_LoopField,"Ui)\b" a "(.*)\b",p)
+			position.=a p1 " ",pos[a]:=p1
+			Gui,Show,%position%
+			xadd("gui","show",pos)
+		}
+		action:=""
+	}
+	undo()
+	return
+}

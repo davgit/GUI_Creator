@@ -1,0 +1,5 @@
+clean(x,y=0){
+	if y=1
+	return regexreplace(x,"i)(?:[^a-z0-9 ]|\&)","")
+	return regexreplace(regexreplace(x,"i)(?:[^a-z0-9 ]|\&)","")," ","_")
+}

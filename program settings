@@ -1,0 +1,70 @@
+program_settings(){
+	static
+	programsettings:
+	hotkey_on(1)
+	settings:=xget("settings"),fun:=constants("positioning")
+	functions:=[]
+	for a,b in constants("positioning").info
+	functions[a]:=b
+	for a,b in constants("duplicate").info
+	functions[a]:=b
+	Gui,60:Destroy
+	style:=easyatt(xg({settings:"//font"})),style.color:=RGB(style.color)
+	Gui,60:Font,% compilefont(style),% style.name
+	Gui,60:+hwndhwnd +Resize +Owner1
+	hwnd(60,hwnd)
+	Gui,60:Default
+	Gui,Add,Text,,Click or press F2 to change the values.`nAvoid any hotkey using the left button`nonly use modified right button (+RButton)
+	Gui,Add,Tab,w850 Buttons h550,Hotkeys|Default Sizes
+	Gui,Add,ListView,w400 h480 vsyslistview321 AltSubmit -ReadOnly gproset,Key|Hotkey
+	Gui,Add,ListView,x+10 w400 h480 vsyslistview322 AltSubmit -ReadOnly gproset,Key|Hotkey
+	Gui,Tab,2
+	Gui,Add,ListView,w500 h500 -ReadOnly AltSubmit gproset,Size (Width Height)|Control
+	Gui,ListView,SysListView321
+	Gui,Tab
+	Gui,Add,Button,gpsfont xm,GUI Font
+	for a,b in functions
+	LV_Add("",ssn(settings,"//Hotkeys/" clean(a)).text,a)
+	Gui,60:ListView,SysListView322
+	for a,b in constants("controls")
+	LV_Add("",ssn(settings,"//Create/" clean(a)).text,a)
+	Gui,60:Show,,Program Settings
+	LV_Modify(1,"Select Focus")
+	Gui,ListView,SysListView323
+	for a,b in constants("controls")
+	LV_Add("",ssn(settings,"//Default/" clean(a)).text,a)
+	return
+	proset:
+	if A_GuiEvent not in normal
+	return
+	Send,{f2}
+	60GuiContextMenu:
+	return
+	60GuiEscape:
+	60GuiClose:
+	for a,b in {SysListView321:"Hotkeys",SysListView322:"Create",SysListView323:"Default"}
+	{
+		Gui,60:ListView,%a%
+		Loop,% LV_GetCount()
+		{
+			LV_GetText(val,A_Index),LV_GetText(set,A_Index,2)
+			if val
+			xadd("settings",b "/" clean(set),"",val)
+			if !val
+			if remove:=xg({settings:"//" b "/" clean(set)})
+			remove.parentnode.removechild(remove)
+		}
+	}
+	hotkey_on(),xsave("settings")
+	Gui,60:Destroy
+	return
+	psfont:
+	style:=easyatt(xg({settings:"//font"}))
+	style:=style.name?style:{name:"Arial"}
+	style.color:=RGB(style.color)
+	if !dlg_font(name,style,rgb(style.color))
+	return
+	font:=xadd("settings","font",style)
+	program_settings()
+	return
+}

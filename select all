@@ -1,0 +1,6 @@
+select_all(){
+	all:=[]
+	for a,b in getallpos(hwnd(1))
+	married(a),all[a]:=a
+	selected_controls(all),showhighlight()
+}

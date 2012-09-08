@@ -1,0 +1,3 @@
+c_options(x){
+	return xg({settings:"//" x}).text
+}

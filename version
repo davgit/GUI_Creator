@@ -1,0 +1,26 @@
+version(){
+	SplashTextOn,200,50,Please wait,Downloading latest information
+	URLDownloadToFile,http://www.autohotkey.net/~maestrith/creatorbeta/GUI Creator.text,version.txt
+	SplashTextOff
+	FileRead,ver,version.txt
+	Gui,55:Destroy
+	setguifont(55)
+	Gui,55:+hwndhwnd +Resize +Owner1
+	Gui,55:Add,Edit,w500 h500,%ver%
+	Gui,55:Add,Button,gverupdate w500,Update
+	shapeset(55,{Edit1:"wh",Button1:"yw"},hwnd)
+	Gui,55:Show,% getwinpos(0,0,0,0,hwnd(1)),% "Version: " gui(1)
+	return
+	verupdate:
+	ext:=A_IsCompiled?".exe":".ahk"
+	m("You will be prompted to save your current gui....if you do not do so you will lose all edited data")
+	save()
+	FileMove,%A_ScriptFullPath%,% "Backup_" gui(1) ext
+	URLDownloadToFile,http://www.autohotkey.net/~maestrith/creatorbeta/GUI Creator%ext%,GUI Creator%ext%
+	run,GUI Creator%ext%
+	ExitApp
+	return
+	version:
+	version()
+	return
+}

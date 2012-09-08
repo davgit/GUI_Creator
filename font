@@ -1,0 +1,69 @@
+font(){
+	sel:=selected_controls(),con:=xget("gui"),right:=var("right").control+0
+	sel[right]:=right,style:=[]
+	if n:=ssn(con,"//*[@hwnd='" right "']/@font")
+	values:=sn(n,"../@*")
+	style:=easyatt(ssn(n,".."))
+	name:=style.font?style.font:"Arial"
+	if !dlg_font(name,style,rgb(style.color))
+	return
+	for a,b in sel
+	{
+		font:=ssn(con,"//*[@hwnd='" a "']")
+		for b,c in Style
+		{
+			if b=name
+			b:="font"
+			if b=Color
+			c:=rgb(c)
+			font.SetAttribute(b,c)
+		}
+		size:=compilefont(easyatt(font))
+		Gui,font,%size%,% style.name
+		GuiControl,font,% a
+	}
+	Gui,Font
+}
+Dlg_Font(ByRef Name,ByRef Style,ByRef Color,Effects=true,hGui=0){
+	name:=style.name?style.name:name
+	strput(strget(&name),&name,"CP0")
+	LogPixels:=DllCall("GetDeviceCaps","uint",DllCall("GetDC","uint",hGui),"uint",90)
+	VarSetCapacity(LOGFONT,128,0)
+	Effects:=0x041+(Effects ? 0x100 : 0)
+	DllCall("RtlMoveMemory","uint",&LOGFONT+28,"Uint",&Name,"Uint",32)
+	s:=style.bold?NumPut(700,LOGFONT,16)
+	s:=style.italic?NumPut(255,LOGFONT,20,1)
+	s:=style.underline?NumPut(1,LOGFONT,21,1)
+	s:=style.strikeout?NumPut(1,LOGFONT,22,1)
+	if style.size
+	s:=-DllCall("MulDiv","int",style.size,"int",LogPixels,"int",72),NumPut(s,LOGFONT,0,"Int")
+	else  NumPut(16,LOGFONT,0)
+	VarSetCapacity(CHOOSEFONT,60,0),NumPut(60,CHOOSEFONT,0),NumPut(hGui,CHOOSEFONT,4),NumPut(&LOGFONT,CHOOSEFONT,12),NumPut(Effects,CHOOSEFONT,20),NumPut(color,CHOOSEFONT,24)
+	r:=DllCall("comdlg32\ChooseFontA", "uint",&CHOOSEFONT)
+	if !r
+	return false
+	VarSetCapacity(Name,32)
+	DllCall("RtlMoveMemory","str",Name,"Uint",&LOGFONT + 28,"Uint",32)
+	Style:="s" NumGet(CHOOSEFONT,16) // 10
+	old:=A_FormatInteger
+	SetFormat,integer,hex
+	Color:=NumGet(CHOOSEFONT,24)
+	SetFormat,integer,%old%
+	Style=
+	VarSetCapacity(s,3)
+	DllCall("RtlMoveMemory","str",s,"Uint",&LOGFONT + 20,"Uint",3)
+	bold:=NumGet(LOGFONT,16)>=700?1:0
+	italic:=NumGet(LOGFONT,20,"UChar")?1:0
+	underline:=NumGet(LOGFONT,21,"UChar")?1:0
+	strikeout:=NumGet(LOGFONT,22,"UChar")?1:0
+	s:=NumGet(LOGFONT,0,"Int")
+	style:={size:Abs(DllCall("MulDiv","int",abs(s),"int",72,"int",LogPixels)),underline:underline,italic:italic,bold:bold,name:strget(&name,cp0),color:color,strikeout:strikeout}
+	name:=strget(&name,cp0) 
+	return 1
+}
+rgb(c){
+	setformat,IntegerFast,H
+	c:=(c&255)<<16 | (c&65280) | (c>>16),c:=SubStr(c,1)
+	SetFormat, integerfast,D
+	return c
+}

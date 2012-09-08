@@ -1,0 +1,24 @@
+toggleoptions(options,onoff){
+	static
+	con:=var("right").control
+	if !onoff
+	loop,Parse,options,%A_Space%
+	{
+		if InStr(A_LoopField,"-"),value:=SubStr(A_LoopField,2)
+		GuiControl,1:+%value%,%con%
+		else
+		GuiControl,1:-%A_LoopField%,%con%
+	}
+	else
+	loop,Parse,options,%a_space%
+	{
+		if InStr(A_LoopField,"-")
+		value:=SubStr(A_LoopField,2),oper:="-"
+		if InStr(A_LoopField,"+")
+		value:=SubStr(A_LoopField,2),oper:="+"
+		if A_LoopField not contains +,-
+		oper:="+",value:=A_LoopField
+		GuiControl,1:%oper%%value%,%con%
+	}
+	return
+}

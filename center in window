@@ -1,0 +1,23 @@
+center_horizontally(){
+	p:=posinfo(),min:=p.x.minindex(),max:=p.w.maxindex(),pos:=var("pos")
+	getwinpos(x,y,w,h,hwnd(1))
+	ow:=w-(max-min)
+	space:=ow/2
+	offset:=space-min
+	for a,b in selected_controls()
+	p:=getconpos(a),checkmove(a,p.x+offset+pos.border)
+	showhighlight(),Redraw()
+}
+center_vertically(){
+	p:=posinfo(),min:=p.y.minindex(),max:=p.h.maxindex(),pos:=var("pos")
+	getwinpos(x,y,w,h,hwnd(1))
+	oh:=h-(max-min)
+	space:=oh/2
+	offset:=space-min
+	for a,b in selected_controls()
+	p:=getconpos(a),checkmove(a,,p.y+offset+pos.border+pos.Caption)
+	showhighlight(),Redraw()
+}
+center_in_window(){
+	center_vertically(),center_horizontally()
+}

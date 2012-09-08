@@ -1,0 +1,40 @@
+space_evenly_vertical(){
+	p:=posinfo(),min:=p.y.minindex(),max:=p.h.maxindex(),th:=p.th
+	for a,b in selected_controls()
+	count:=A_Index-1
+	spaces:=(max-min-th)/count
+	spaces:=spaces<0?0:spaces
+	for a in p.h{
+		for b,c in p.h[a]{
+			cc++
+			if cc=1
+			{
+				start:=c.y+c.h
+				continue
+			}
+			checkmove(b,,start+spaces)
+			start+=spaces+c.h
+		}
+	}
+	showhighlight()
+}
+space_evenly_horizontal(){
+	p:=posinfo(),min:=p.x.minindex(),max:=p.w.maxindex(),tw:=p.tw
+	for a,b in selected_controls()
+	count:=A_Index-1
+	spaces:=(max-min-tw)/count
+	spaces:=spaces<0?0:spaces
+	for a in p.w{
+		for b,c in p.w[a]{
+			cc++
+			if cc=1
+			{
+				start:=c.x+c.w
+				continue
+			}
+			checkmove(b,start+spaces)
+			start+=spaces+c.w
+		}
+	}
+	showhighlight()
+}

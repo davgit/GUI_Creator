@@ -1,0 +1,10 @@
+intab(position,type="Tab"){
+	tab:=sn(xget("gui"),"//*[@type='" type "']"),all:=getallpos(hwnd(1))
+	xx:=position.x,yy:=position.y
+	while,t:=ssn(tab.item[A_Index-1],"@hwnd").text
+	{
+		x:=all[t].x,y:=all[t].y,w:=all[t].w+x,h:=all[t].h+y
+		if (x<xx && xx<w)&&(y<yy&&yy<h)
+		return t
+	}
+}

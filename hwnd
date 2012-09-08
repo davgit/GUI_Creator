@@ -1,0 +1,10 @@
+hwnd(num="",val=""){
+	static win:=[]
+	if !num
+	return win
+	if num.h
+	return win["h" num.h]
+	if !val
+	return win[num]
+	win[num]:=val,win["h" num]:="ahk_id " val
+}

@@ -1,0 +1,4 @@
+copy_code_to_clipboard(){
+	Clipboard:=export(1)
+	m("Code coppied to clipboard")
+}

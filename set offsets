@@ -1,0 +1,29 @@
+set_offsets(){
+	static
+	offset:=xg({settings:"//Offset"})
+	x:=ssn(offset,"@x").text!=""?ssn(offset,"@x").text:2
+	y:=ssn(offset,"@y").text!=""?ssn(offset,"@y").text:0
+	sysget,caption,4
+	sysget,border,32
+	caption+=Border
+	Gui,56:Destroy
+	Gui,56:+Owner1
+	Gui,56:Add,Text,,Make sure that you have at least one control in the main window near the top corner.`nAdjust the values and press Update Alignment.
+	Gui,56:Add,Text,,Offset value for X
+	Gui,56:Add,Edit,w50 vx x+10,%x%
+	Gui,56:Add,UpDown,range-5-5
+	Gui,56:Add,Text,x10,Offset value for Y
+	Gui,56:Add,Edit,w50 vy x+10,%y%
+	Gui,56:Add,UpDown,range-5-5
+	Gui,56:Add,Button,galignall,Update Alignment
+	Gui,56:Show,,Set Offset
+	ControlSetText,Edit1,%x%,Set Offset
+	ControlSetText,Edit2,%y%,Set Offset
+	return
+	alignall:
+	Gui,56:Submit,NoHide
+	Gui,1:Default
+	xadd("settings","Offset",{x:x,y:y})
+	select_all(),align_selected_to_grid(),xsave("settings")
+	return
+}

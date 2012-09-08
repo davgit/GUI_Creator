@@ -1,0 +1,10 @@
+update_changed_columns(x,list){
+	Gui,1:Default
+	Gui,1:ListView,%x%
+	while,LV_GetText(out,0,1)
+	lv_deletecol(1)
+	loop,parse,list,|
+	if A_LoopField
+	LV_InsertCol(A_Index,"autohdr",A_LoopField)
+	lv_modifycol(1,"autohdr")
+}

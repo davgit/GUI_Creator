@@ -1,0 +1,12 @@
+default_size(type,pos){
+	if Default:=xg({settings:"//Default/" type}).text
+	{
+		RegExReplace(Default,"[^0-9]"," ",count)
+		find:=count?"(.*)[^0-9](.*)":"(.*)"
+		RegExMatch(Default,"O)" find,out)
+		p:=count?{w:out.1,h:out.2}:{w:out.1}
+		for a,b in p
+		pos.Insert(a,b)
+	}
+	return pos
+}

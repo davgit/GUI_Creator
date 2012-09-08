@@ -1,0 +1,6 @@
+compilenodes(node){
+	n:=[]
+	while,v:=node.item[A_Index-1]
+	n[v.text]:=v.text
+	return n
+}

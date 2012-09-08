@@ -1,0 +1,76 @@
+export(export=""){
+	doc:=xget("Constants"),const:=doc.SelectSingleNode("//Constants/info"),getwinpos(x,y,w,h,hwnd(1))
+	gui:=xget("gui"),count=0
+	cc:=sn(doc,"//Constants/info/*")
+	lastfont:="Gui,Font," compilefont(easyatt(c)) "," font "`n"
+	allcon:=sn(gui,"//@type"),count:=0,glist:=[],vlist:=[],conflict:=[],total:="#SingleInstance,force`n"
+	if options:=ssn(gui,"//show/@options").text
+	total.="Gui," options "`n"
+	while,c:=ssn(allcon.item[a_index-1],".."){
+		list=
+		ee:=easyatt(c)
+		if RegExMatch(ee.type,"i)(ComboBox|DDL|DropDownList)")
+		c.SetAttribute("h","")
+		tn:=ssn(c,"@tabnum").Text
+		if (tn!=lasttn&&count)
+		total.="Gui,Tab," tn "," count "`n"
+		fontname:=ssn(c,"@font").Text,font:="Gui,Font," compilefont(easyatt(c)) "," fontname "`n"
+		if (font!=lastfont&&fontname)
+		total.="Gui,Font," compilefont(easyatt(c)) "," fontname "`n"
+		if (font!=lastfont&&fontname="")
+		total.="Gui,Font`n"
+		if ee.g
+		glist[ee.g]:=ee.g
+		if ee.v
+		vlist[ee.v]:=ee.v
+		type:=ssn(c,"@type").text,ccc:=sn(doc,"//Controls/" type "/constants/*[@value]")
+		for a,b in {ccc:ccc,cc:cc}
+		while,v:=b.item[A_Index-1],val:=ssn(v,"@value").text
+		if (val!="value"&&ssn(c,"@" val).text!=""){
+			if val in x,y
+			ad:=adjust(ssn(c,"@" val).text,ssn(c,"@" val).text),list.=val ad[val] " "
+			else
+			list.=val ssn(c,"@" val).text " "
+		}
+		o:=sn(doc,"//Controls/" type "/info/*[@value]")
+		options:=ssn(c,"@options").text
+		if InStr(type,"tab")
+		count++
+		total.="Gui,Add," type "," list options "," ssn(c,"@value").text "`n"
+		if type=TreeView
+		{
+			if xg({gui:"//show/@number"}).text
+			total.="Gui,Default`n"
+			total.="TV_Add(" chr(34) type chr(34) ")`n"
+		}
+		lastfont:="Gui,Font," compilefont(easyatt(c)) "," fontname "`n"
+		lasttn:=tn
+	}
+	for a,b in vlist
+	{
+		con:=sn(gui,"//*[@v='" a "']")
+		if con.length>1
+		while,hwnd:=con.item[A_Index-1].SelectSingleNode("@hwnd").text
+		conflict[hwnd]:=hwnd
+	}
+	if conflict.minindex()
+	selected_controls(conflict),showhighlight(),m("The selected controls share the same variable.  Please change them.")
+	title:=xg({gui:"//show/@title"}).text
+	options:=xg({gui:"//show/@show"}).text
+	total.="Gui,Show,x" x " y" y " w" w " h" h " " options "," title "`n"
+	number:=xg({gui:"//show/@number"}).text
+	if number
+	total:=RegExReplace(total,"i)Gui,","Gui," number ":")
+	for a,b in glist
+	total.=a ":`nreturn`n"
+	if export
+	return total
+	over:=xg({settings:"//Warn_Overwrite"}).Text?"S16":"S"
+	if !filename
+	FileSelectFile,filename,%over%,,Export Gui Structure as...,*.ahk
+	if ErrorLevel
+	return
+	filename:=InStr(filename,".ahk")?filename:filename ".ahk"
+	filedelete,%filename%
+	FileAppend,%total%,%filename%
+}

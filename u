@@ -1,0 +1,24 @@
+u(x=""){
+	static undo
+	static redo:=[]
+	if !IsObject(undo)
+	undo:=undo({get:1})
+	if (A_ThisLabel="undo"||x="undo"){
+		if !undo.maxindex()
+		return
+		redo[undo.maxindex()]:=undo[undo.maxindex()],undo.remove(undo.maxindex())
+		if !undo.maxindex()
+		return new(1)
+		import(undo[undo.maxindex()])
+	}
+	if (A_ThisLabel="redo"||x="redo"){
+		if redo.minindex()
+		import(redo[redo.minindex()])
+		if !redo.minindex()
+		return
+		undo[redo.minindex()]:=redo[redo.minindex()],redo.remove(redo.minindex())
+	}
+	return
+}
+redo(){
+}

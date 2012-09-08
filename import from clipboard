@@ -1,0 +1,3 @@
+Import_From_Clipboard(){
+	import(Clipboard)
+}

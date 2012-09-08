@@ -1,0 +1,6 @@
+new(noreset=""){
+	win:=WinExist(hwnd("h88"))
+	pos:=getwinpos(x,y,w,h,hwnd(88))
+	reset(noreset),xadd("settings","lastopen",{file:""})
+	gui()
+}

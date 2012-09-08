@@ -1,0 +1,92 @@
+edit_control(){
+	ec:
+	con:=var("right").control,c:=xg({gui:"//*[@hwnd='" con "']"})
+	att:=easyatt(c)
+	type:=xg({gui:"//*[@hwnd='" con "']/@type"}).text
+	menu:=xget("Constants"),m:=menu.selectnodes("//Controls/" type "/info/*[@value]")
+	rows:=m.length
+	Gui,45:Destroy
+	setguifont(45)
+	if rows
+	Gui,45:Add,ListView,w600 Checked r%rows%,Set|Value|Description
+	else
+	Gui,45:Add,ListView,w600 h0,set|value|description
+	Gui,45:Default,
+	while,v:=m.item[A_Index-1]{
+		value:=ssn(v,"@value").text
+		Check:=InStr(att.options,value)?"Check":""
+		LV_Add(check,"",value,ssn(v,"@desc").text)
+	}
+	loop,3
+	LV_ModifyCol(A_Index,"autohdr")
+	mm:=menu.selectnodes("//Controls/" type "/constants/*[@value]|//Constants/info/*")
+	rows:=mm.length
+	Gui,45:Add,ListView,r%rows% w600 AltSubmit gecedit NoSort -ReadOnly,Value|Info
+	while,v:=mm.item[A_Index-1]{
+		in:=ssn(v,"@value").text
+		if in in x,y
+		vv:=adjust(att[in],att[in])[in]
+		else
+		vv:=att[in]
+		LV_Add("",vv,ssn(v,"@desc").text)
+	}
+	LV_ModifyCol(1,200),LV_ModifyCol(2,"autohdr")
+	Gui,Add,Button,gecu Default,Update Control
+	ecp:=xg({settings:"//EditControl"}),ecp:=easyatt(ecp),position:=""
+	for a,b in ecp
+	position.=" " a b " "
+	Gui,45:Show,% position
+	var({current:{options:m,menu:mm,atts:att,control:c,type:type}})
+	return
+	ecu:
+	m:=var("current"),values:=m.values,menu:=m.menu,type:=m.type
+	toggleoptions(xg({gui:"//*[@hwnd='" var("right").control "']/@options"}).text,onoff)
+	Gui,45:Default
+	Gui,ListView,SysListView321
+	rownumber:=0,optionlist:=""
+	while,RowNumber:=LV_GetNext(RowNumber,"C")
+	lv_gettext(value,rownumber,2),optionlist.=value " "
+	options:=trim(optionlist)
+	c.SetAttribute("options",options)
+	toggleoptions(options,1),Redraw(),position:=""
+	Gui,ListView,SysListView322
+	while,v:=menu.item[A_Index-1]{
+		LV_GetText(value,A_Index),val:=ssn(v,"@value").text
+		if (val="value")
+		name:=value
+		c.SetAttribute(val,value)
+		if val in x,y,w,h
+		position.=val value " "
+	}
+	GuiControl,1:MoveDraw,% var("right").control,%position%
+	if type=listview
+	return update_changed_columns(var("right").control,name),undo()
+	if type in tab,ListBox
+	{
+		GuiControl,1:,% var("right").control,|%name%
+		return undo()
+	}
+	con:=var("right").control
+	GuiControl,1:,%con%,%name%
+	undo(),Redraw()
+	return
+	ecedit:
+	Gui,45:Default
+	if A_GuiEvent!=Normal
+	return
+	m:=var("current"),values:=m.values,menu:=m.menu,type:=m.type
+	LV_GetText(setting,LV_GetNext(),2),LV_GetText(list,LV_GetNext(),1)
+	if (type="TreeView"&&InStr(setting,"name of"))
+	return treeview(1)
+	if (RegExMatch(type,"i)(ListView|ListBox|Tab,ComboBox,DropDownList,DDL)")&&InStr(setting,"name of"))
+	return list_editor(list)
+	if (type="TreeView")
+	return treeview()
+	send,{f2}
+	return
+	45GuiClose:
+	45GuiEscape:
+	win:=getwinpos(x,y,w,h,WinActive()),xadd("settings","EditControl",{x:x,y:y})
+	Gui,45:Destroy
+	return
+}

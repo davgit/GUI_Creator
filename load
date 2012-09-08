@@ -1,0 +1,27 @@
+load(load=""){
+	if !load
+	FileSelectFile,load,,,,*.xml
+	if ErrorLevel
+	return
+	reset(),gui(2),xadd("settings","lastopen",{file:load}),xsave("settings")
+	xml("temp","gui",load),con:=xget("temp"),font:=sn(con,"//@type/..")
+	show:=ssn(con,"//show"),x:=xg({gui:"//show"})
+	e:=easyatt(show)
+	for a,b in e
+	%a%:=b
+	if x
+	Gui,Show,x%x% y%y% w%w% h%h% hide
+	if !font.length
+	return m("I am sorry but this file is not formatted properly")
+	while,control:=font.item[A_Index-1]{
+		pos:=easyatt(control)
+		a:=adjust(pos.x,pos.y)
+		pos.x:=a.x,pos.y:=a.y
+		add_control(pos)
+	}
+	x:=xg({gui:"//show"})
+	for a,b in allattributes("temp","//show")
+	x.SetAttribute(a,b)
+	Gui,Show
+	undo()
+}

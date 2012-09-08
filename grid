@@ -1,0 +1,10 @@
+grid(ByRef x,ByRef y,grid=""){
+	offset:=xg({settings:"//Offset"})
+	out:=c_options("Snap_to_Grid")
+	out:=grid?grid:out
+	offsetx:=ssn(offset,"@x").text!=""?ssn(offset,"@x").text:2
+	offsety:=ssn(offset,"@y").text!=""?ssn(offset,"@y").text:0
+	x:=out?round(x,-1)-offsetx:x
+	y:=out?round(y,-1)-offsety:y
+	return {x:x,y:y}
+}

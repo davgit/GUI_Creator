@@ -1,0 +1,10 @@
+rbutton(){
+	rbutton:
+	MouseGetPos,x,y,win,con,2
+	married(con)
+	var({right:{control:con+0,x:x,y:y}})
+	if (win!=hwnd(1))
+	return
+	showmenu()
+	return
+}

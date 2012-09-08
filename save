@@ -1,0 +1,14 @@
+save(filename=""){
+	undo()
+	if !filename
+	over:=xg({settings:"//Warn_Overwrite"}).Text?"S16":"S"
+	if !filename
+	FileSelectFile,filename,%over%,,Save Gui Structure as...,*.xml
+	if ErrorLevel
+	return
+	filename:=InStr(filename,".xml")?filename:filename ".xml"
+	xadd("settings","lastopen",{file:filename}),xsave("settings")
+	FileDelete,%filename%
+	b:=xget("gui")
+	b.transformNodeToObject(style(),b),b.save(filename)
+}

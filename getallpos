@@ -1,0 +1,13 @@
+getallpos(win){
+	list:=[]
+	WinGet,cl,ControlListhwnd,ahk_id %win%
+	Loop,Parse,cl,`n
+	{
+		con:=A_LoopField
+		married(con)
+		ControlGetPos,x,y,w,h,,ahk_id %con%
+		for a,b in {x:x,y:y,w:w,h:h,xx:x+w,yy:y+h}
+		list[con,a]:=b
+	}
+	return list
+}

@@ -1,0 +1,47 @@
+hotkey_on(x=""){
+	Hotkey,IfWinActive,% hwnd("h1")
+	Hotkey,~RButton,RButton,On
+	Hotkey,*~LButton,LButton,On
+	Hotkey,^a,select_all,On
+	Hotkey,^c,copy_selected,On
+	Hotkey,^v,paste_selected,On
+	Hotkey,BS,Delete,On
+	Hotkey,Delete,Delete,On
+	Hotkey,^z,undo,On
+	Hotkey,+^z,redo,On
+	Hotkey,^y,redo,On
+	for a,b in {up:1,down:1,left:1,right:1}
+	hotkey,%a%,adjust,On
+	set:=xget("settings")
+	onoff:=x?"off":"on"
+	for a,b in {Create:1,Hotkeys:1}{
+		hotkeys:=sn(set,"//" a "/*")
+		while,hk:=hotkeys.item[A_Index-1]
+		Hotkey,% hk.text,%a%,%onoff%
+	}
+	return
+	hotkeys:
+	type:=ssn(xget("settings"),"//Hotkeys/*[text()='" A_ThisHotkey "']").nodename
+	%type%()
+	return
+	create:
+	MouseGetPos,x,y,win,con
+	grid(x,y),adjust(x,y)
+	ControlGet,tabnum,Tab,,,% "ahk_id" intab({x:x,y:y})
+	type:=ssn(xget("settings"),"//Create/*[text()='" A_ThisHotkey "']").nodename
+	add_control(default_size(type,{type:type,x:x,y:y,control:type,tabnum:tabnum,tab:intab({x:x,y:y})}))
+	undo()
+	return
+	undo:
+	redo:
+	u()
+	undo()
+	return
+	delete:
+	select_all:
+	copy_selected:
+	paste_selected:
+	f:=A_ThisLabel,%f%()
+	undo()
+	return
+}

@@ -1,0 +1,10 @@
+splitfont(font,pos){
+	RegExMatch(font,"iU)s(.*)\b",size)
+	pos["size"]:=size1
+	RegExMatch(font,"iU)c(.*)\b",size)
+	pos["color"]:=size1
+	for a,b in {bold:1,italic:1,strikeout:1,underline:1}
+	if InStr(font,a)
+	pos[a]:=1
+	return pos
+}

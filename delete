@@ -1,0 +1,7 @@
+delete(){
+	sel:=selected_controls()
+	sel[var("right").control]:=var("right").control
+	for a,b in sel
+	remove:=xg({gui:"//*[@hwnd='" a "']"}),remove.parentnode.removechild(remove),checkmove(a,-500,-500,0,0)
+	selected_controls({}),showhighlight()
+}
