@@ -1,5 +1,6 @@
 #SingleInstance, Force
 DetectHiddenWindows,On
+SetWorkingDir, %A_ScriptDir%
 compile_constants(),quick_help()
 if xg({settings:"//Auto_load_last_project"}).text
 {
@@ -54,7 +55,6 @@ gui()
 #include selectall
 #include setguipos
 #include snap
-
 #include treeview
 #include program settings
 #include font
@@ -81,3 +81,4 @@ gui()
 #include compilenodes
 #include default size
 #include version
+#include import from clipboard

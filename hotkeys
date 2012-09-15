@@ -2,16 +2,8 @@ gui_hotkeys(){
 	Hotkey,IfWinActive,% hwnd([1])
 	Hotkey,~RButton,showmenu,On
 	Hotkey,*~LButton,LButton,On
-	Hotkey,^a,selectall,On
-	Hotkey,q,quickmenu,On
-	Hotkey,^c,copy_selected,On
-	Hotkey,^v,paste_selected,On
-	Hotkey,Delete,Delete,On
-	Hotkey,BS,Delete,On
-	Hotkey,^z,undo,On
-	Hotkey,+^z,redo,On
-	Hotkey,^y,redo,On
-	Hotkey,^q,quickmenu,On
+	for a,b in {Up:"adjust",Down:"adjust",Left:"adjust",Right:"adjust","^q":"quickadd",Delete:"Delete",BS:"Delete","^a":"selectall","^c":"copy_selected","^v":"paste_selected","^z":"undo","+^z":"redo","^y":"redo","^q":"quickadd"}
+	hotkey,%a%,%b%,On
 	for a,b in {Create:1,Hotkeys:1}{
 		key:=sn(xget("settings"),"//" a "/*")
 		while,k:=key.item[A_Index-1]
@@ -25,9 +17,10 @@ gui_hotkeys(){
 	return
 	hotkeys:
 	MouseGetPos,x,y,win,con,2
-	married(con)
-	var({right:{control:con+0,x:x,y:y}})
-	hk:=xg({settings:"//Hotkeys/*[text()='" A_ThisHotkey "']"}).nodename
+	married(con),var({right:{control:con+0,x:x,y:y}}),hk:=xg({settings:"//Hotkeys/*[text()='" A_ThisHotkey "']"}).nodename
+	if InStr("undo|redo",hk)
+	goto,%hk%
+	else
 	%hk%(),undo()
 	return
 	undo:

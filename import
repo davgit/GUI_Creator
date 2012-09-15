@@ -72,7 +72,7 @@ import(program=""){
 			if InStr(A_LoopField,b)
 			so.=b " "
 			for a,b in constants("pos")
-			if RegExMatch(A_LoopField,"Ui)\b" a "(.*)\b",p)
+			if RegExMatch(where,"Ui)\b" a "(.*)\b",p)
 			position.=a p1 " ",pos[a]:=p1
 			Gui,Show,%position%
 			xadd("gui","show",pos)

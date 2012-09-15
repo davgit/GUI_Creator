@@ -14,8 +14,7 @@ add_control(pos){
 	}
 	if pos.type="tab"
 	count:=sn(xget("gui"),"//*[@type='Tab']").length+1,pos["tn"]:=count
-	value:=conlist[pos.type]?conlist[pos.type]:pos.type
-	value:=pos.value?pos.value:value
+	value:=conlist[pos.type]?conlist[pos.type]:pos.type,value:=pos.value?pos.value:value
 	if value=Picture
 	pos.value:=value:=trim(picture())
 	pos.type:=constants("Controls")[pos.type]

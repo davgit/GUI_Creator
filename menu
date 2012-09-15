@@ -1,5 +1,5 @@
-menu(){
-	quickmenu:
+quick_add(){
+	quickadd:
 	MouseGetPos,x,y,win,con,2
 	married(con)
 	var({right:{control:con+0,x:x,y:y}})
@@ -13,7 +13,7 @@ menu(){
 	create:
 	type:=xg({settings:"//Create/*[text()='" A_ThisHotkey "']"}).nodename
 	MouseGetPos,x,y,win,con,2
-	grid(x,y,1),add_control({x:x,y:y,type:type,value:type,type:type}),undo()
+	grid(x,y,1),add_control({x:x,y:y,type:type}),undo()
 	return
 }
 mm(){
@@ -67,8 +67,8 @@ ac(){
 	c:
 	right:=var("right"),x:=right.x,y:=right.y
 	grid(x,y,1)
-	add_control({x:x,y:y,type:A_ThisMenuItem,value:A_ThisMenuItem})
-	sleep,1
+	add_control({x:x,y:y,type:A_ThisMenuItem})
+	if A_ThisLabel=Menu
 	undo()
 	return
 }

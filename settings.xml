@@ -20,7 +20,6 @@
 		<Tab>t</Tab>
 		<Groupbox>g</Groupbox>
 		<Combobox>c</Combobox>
-		<ListView>z</ListView>
 		<DropDownList>d</DropDownList>
 		<ComboBox>+^c</ComboBox>
 		<Picture>p</Picture>
@@ -28,10 +27,15 @@
 	<Hotkeys>
 		<Snap_Window_to_Grid>+s</Snap_Window_to_Grid>
 		<Font>f</Font>
-		<Center_In_Window>q</Center_In_Window>
 		<Edit_Control>+e</Edit_Control>
 		<Export>e</Export>
 		<Space_Evenly_Horizontal>h</Space_Evenly_Horizontal>
+		<Import_From_Clipboard>c</Import_From_Clipboard>
+		<Quick_Add>q</Quick_Add>
+		<Undo>z</Undo>
+		<Redo>r</Redo>
+		<Paste_Selected>w</Paste_Selected>
+		<Copy_Selected>+w</Copy_Selected>
 	</Hotkeys>
 	<Offset x="2" y="0"></Offset>
 	<EditControl x="1081" y="242"></EditControl>

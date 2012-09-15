@@ -6,7 +6,8 @@ program_settings(){
 	for a,b in {positioning:1,duplicate:1,file:1,resize:1}
 	for a,b in constants(a).info
 	functions[a]:=b
-	functions["Edit Control"]:="Edit Control"
+	for a,b in {"Edit Control":1,"Quick Add":1,Undo:1,Redo:1,"Paste Selected":1,"Copy Selected":1}
+	functions[a]:=a
 	Gui,60:Destroy
 	setguifont(60)
 	Gui,60:+hwndhwnd +Resize +Owner1

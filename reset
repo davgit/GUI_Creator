@@ -1,7 +1,6 @@
 reset(noreset=""){
 	xml({remove:"temp"})
 	xml({remove:"gui"})
-	;add_control({reset:1})
 	if !noreset
 	xml({remove:"undo"})
 }

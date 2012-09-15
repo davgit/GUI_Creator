@@ -1,0 +1,5 @@
+Import_From_Clipboard(){
+	import(Clipboard)
+}
+;Gui,3:Add,Button,,Hi
+;Gui,3:Show,xcenter ycenter,Hi

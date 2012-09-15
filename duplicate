@@ -56,7 +56,7 @@ paste_selected(){
 	grid(x,y)
 	for a,b in var("coppied"){
 		bx:=b.x,by:=b.y
-		offx:=b.x-minx+x,offy:=b.y-miny+y ;,grid(offx,offy) ;,adjust(offx,offy)
+		offx:=b.x-minx+x,offy:=b.y-miny+y
 		b.x:=offx,b.y:=offy
 		add_control(b)
 		b.x:=bx,b.y:=by
