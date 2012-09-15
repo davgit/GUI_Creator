@@ -1,15 +1,14 @@
-inside(minx,miny="",maxx="",maxy=""){
-	inside:=[],win:=hwnd(1),controls:=getallpos(win),p:=[],x:="x",y:="y",cgp:=getconpos(minx)
-	if !miny
-	for a,b in {x:1,y:1,xx:1,yy:1}
-	xy:=SubStr(a,1,1),val:=adjust(cgp[a],cgp[a])[xy],p[xy,val]:=1
+inside(control){
+	if IsObject(control)
+	ea:=control
 	else
-	p[x,minx]:=1,p[x,maxx]:=1,p[y,miny]:=1,p[y,maxy]:=1
-	for a,b in Controls
-	{
-		ad:=adjust(b.x,b.y)
-		if (ad.x>p.x.minindex()&&ad.x<p.x.maxindex())&&(ad.y>p.y.minindex()&&ad.y<p.y.maxindex())
-		inside[a]:=a
-	}
-	return inside
+	ea:=easyatt(xg({gui:"//*[@hwnd='" control "']"}))
+	if ea.h=""
+	gcp:=getconpos(Control),ea.h:=gcp.h
+	xml:=xget("gui"),f:=sn(xml,"//*[@x>" ea.x "][@x<" ea.x+ea.w "][@y>" ea.y "][@y<" ea.y+ea.h "]"),list:=[]
+	while,v:=f.item[A_Index-1].SelectSingleNode("@hwnd")
+	list[v.Text]:=v.Text,l.=v.text "`n"
+	;m(l,0,0,xml.xml)
+	;m(ea.x,ea.w+ea.x,ea.y,ea.h+ea.y)
+	return list
 }

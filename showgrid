@@ -1,0 +1,12 @@
+WM_CTLCOLORDLG(w,l,m,h){
+	Static wBrush
+	if A_Gui!=1
+	return
+	if xg({settings:"//Grid"}).text
+	tile:="tile.bmp"
+	else
+	return
+	If !wBrush
+	hBM:=DllCall("LoadImage",Int,0,Str,tile,Int,0,Int,0,Int,0,UInt,0x400010),wBrush:=DllCall("CreatePatternBrush",UInt,hBM),var({hbm:hbm}),var({wbrush:wbrush})
+	Return wBrush
+}

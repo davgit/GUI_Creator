@@ -26,7 +26,7 @@ constants(x=""){
 	static UpDown:={info:{Horz:"Make's the control's buttons point left/right rather than up/down",Left:"Puts the UpDown on the left side of its buddy rather than the right",Wrap:"Causes the control to wrap around to the other end of its range when the user attempts to go beyond the minimum or maximum","-16":"Cause a vertical UpDown to be isolated","0x80":"Include 0x80 in Options to omit the thousands separator that is normally present between every three decimal digits in the buddy control"}
 	,constants:{Range:"Set the range to be something other than 0 to 100 (eg, -4-45)"}}
 	static Controls:={Button:"Button",Checkbox:"Checkbox",ComboBox:"ComboBox",DateTime:"DateTime",DropDownList:"DropDownList",Edit:"Edit",Groupbox:"Groupbox",Hotkey:"Hotkey",Listbox:"Listbox",ListView:"ListView",MonthCal:"MonthCal",Picture:"Picture",Progress:"Progress",Radio:"Radio",Slider:"Slider",Tab:"Tab",Text:"Text",Treeview:"Treeview",UpDown:"UpDown"}
-	static Quick:={info:{"Snap to Grid":1,"Grid":1,"Add Spaces to Output":1,"Control Borders":1,"Warn Overwrite":1,"Auto load last project":1,"Disable Lists":1}}
+	static Quick:={info:{"Snap to Grid":1,"Grid":1,"Add Spaces to Output":1,"Control Borders":1,"Warn Overwrite":1,"Auto Load Last Project":1,"Disable Lists":1,"Auto Save on Exit":1}}
 	static Positioning:={info:{"Center In Window":1,"Space Evenly Horizontal":1,"Space Evenly Vertical":1,"Align Selected To Grid":1,"Center Vertically":1,"Center Horizontally":1,"Align Vertically":1,"Align Horizontally":1,"Snap Window to Grid":1}}
 	static Resize:={info:{"Resize Width to Grid":1,"Resize Height to Grid":1,"Resize Width and Height to Grid":1}}
 	static duplicate:={info:{"Copy Width":1,"Copy Height":1,"Duplicate Selected":1,"Copy Height and Width":1}}
@@ -50,8 +50,7 @@ constants(x=""){
 	}
 	static font:={bold:1,italic:1,strikeout:1,underline:1,c:1,size:1,q:1,fontw:1,font:1}
 	static pos:={x:"x",y:"y",w:"w",h:"h"}
-	if x=Pos
-	return pos
+	static nh:={x:"x",y:"y",w:"w"}
 	static constantlist:=["x","y","w","h","g","v","value"]
 	return out:=%x%
 }

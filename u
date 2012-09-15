@@ -1,24 +1,25 @@
-u(x=""){
-	static undo
-	static redo:=[]
-	if !IsObject(undo)
-	undo:=undo({get:1})
-	if (A_ThisLabel="undo"||x="undo"){
-		if !undo.maxindex()
-		return
-		redo[undo.maxindex()]:=undo[undo.maxindex()],undo.remove(undo.maxindex())
-		if !undo.maxindex()
-		return new(1)
-		import(undo[undo.maxindex()])
+u(x=0){
+	static last
+	if x.clear
+	return last:=""
+	undo:=xget("undo")
+	if (x=0){
+		if !last
+		last:=ssn(undo,"//undo").lastchild.previoussibling
+		else if last.previoussibling
+		last:=last.previoussibling
 	}
-	if (A_ThisLabel="redo"||x="redo"){
-		if redo.minindex()
-		import(redo[redo.minindex()])
-		if !redo.minindex()
+	if (x=1){
+		if !last
 		return
-		undo[redo.minindex()]:=redo[redo.minindex()],redo.remove(redo.minindex())
+		else if last.nextsibling
+		last:=last.nextsibling
+		else
+		return
 	}
-	return
-}
-redo(){
+	u:=last.clonenode(1)
+	if ssn(u,"*")
+	load(ssn(u,"*"))
+	else
+	xml({remove:"gui"}),gui(2)
 }

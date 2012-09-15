@@ -1,0 +1,4 @@
+copy_code_to_clipboard(){
+	Clipboard:=export(1)
+	MsgBox,,Code Coppied,Code coppied to clipboard,1
+}

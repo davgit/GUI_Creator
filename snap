@@ -4,11 +4,11 @@ snap_window_to_grid(){
 	w:=round(w,-1)
 	h:=round(h,-1)
 	w+=(p.Border*2)+1,h+=(p.Border*2)+p.Caption+1
-	WinMove,% hwnd("h1"),,,,% w,% h
+	WinMove,% hwnd([1]),,,,% w,% h
 }
-snap(){
-	if c_options("Snap_to_Grid")
+snap(a,b,c,d){
+	if (d+0!=hwnd(1))
+	return
+	if xg({settings:"//Snap_to_Grid"}).text
 	snap_window_to_grid()
-	Hotkey,IfWinActive,% hwnd("h1")
-	Hotkey,*LButton,LButton,On
 }

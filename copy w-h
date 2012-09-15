@@ -1,5 +1,0 @@
-copy_width(){
-	right:=var("right")
-	p:=getconpos(right.Control)
-	m(p.w)
-}

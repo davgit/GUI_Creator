@@ -1,10 +1,8 @@
-hwnd(num="",val=""){
-	static win:=[]
-	if !num
-	return win
-	if num.h
-	return win["h" num.h]
-	if !val
-	return win[num]
-	win[num]:=val,win["h" num]:="ahk_id " val
+hwnd(number,wnd=""){
+	static hwnd:=[]
+	if IsObject(number)
+	return hwnd[number.1].h
+	if !wnd
+	return hwnd[number].n
+	hwnd[number]:={n:wnd,h:"ahk_id " wnd+0}
 }

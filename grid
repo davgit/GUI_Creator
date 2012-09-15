@@ -1,10 +1,13 @@
-grid(ByRef x,ByRef y,grid=""){
-	offset:=xg({settings:"//Offset"})
-	out:=c_options("Snap_to_Grid")
-	out:=grid?grid:out
-	offsetx:=ssn(offset,"@x").text!=""?ssn(offset,"@x").text:2
-	offsety:=ssn(offset,"@y").text!=""?ssn(offset,"@y").text:0
+grid(ByRef x,ByRef y,adjust=""){
+	offset:=easyatt(xg({settings:"//Offset"}))
+	out:=xg({settings:"//Snap_to_Grid"}).Text
+	out:=adjust=2?1:out
+	offsetx:=offset.x?offset.x:2
+	offsety:=offset.y?offset.y:0
 	x:=out?round(x,-1)-offsetx:x
 	y:=out?round(y,-1)-offsety:y
+	if adjust=1
+	adjust(x,y)
+	sleep,1
 	return {x:x,y:y}
 }

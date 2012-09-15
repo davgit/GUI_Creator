@@ -1,0 +1,74 @@
+menu(){
+	quickmenu:
+	MouseGetPos,x,y,win,con,2
+	married(con)
+	var({right:{control:con+0,x:x,y:y}})
+	if (win!=hwnd(1))
+	return
+	for a,b in constants("controls")
+	Menu,add,add,%a%,c
+	Menu,add,Show
+	Menu,Delete,add
+	return
+	create:
+	type:=xg({settings:"//Create/*[text()='" A_ThisHotkey "']"}).nodename
+	MouseGetPos,x,y,win,con,2
+	grid(x,y,1),add_control({x:x,y:y,type:type,value:type,type:type}),undo()
+	return
+}
+mm(){
+	showmenu:
+	MouseGetPos,x,y,win,con,2
+	married(con)
+	var({right:{control:con+0,x:x,y:y}})
+	if (win!=hwnd(1))
+	return
+	if con
+	Menu,rmenu,Add,Edit Control,ec
+	menu:=xg({Constants:"//Menu"}),xget("Constants"),m:=menu.selectnodes("//Menu/*")
+	while,v:=m.item[A_Index-1]{
+		menu:=v.SelectNodes("info/*"),mn:=RegExReplace(v.nodename,"_"," ")
+		while,item:=menu.item[A_Index-1].SelectSingleNode("@value").text{
+			Menu,%mn%,Add,% item,menu
+			if xg({settings:"//" v.nodename "/" clean(item)}).text
+			Menu,%mn%,Check,% item
+			else
+			menu,%mn%,UnCheck,% item
+			if (IsFunc(clean(item))=0&&(mn!="Add"))
+			if mn!=quick options
+			list.=item "`n"
+		}
+		Menu,rmenu,Add,%mn%,:%mn%
+	}
+	for a,b in {Version:1,"Program Settings":1,"Window Options":1,"Quick Help":1}
+	Menu,rmenu,Add,%a%,menu
+	Menu,rmenu,Show
+	Menu,rmenu,DeleteAll
+	menu,rmenu,Show
+	return
+	menu:
+	if (A_ThisMenu="quick options"&&A_ThisMenuItem="Grid")
+	var({wbrush:0}),Redraw()
+	if InStr("undo|redo",A_ThisMenuItem){
+		unre:=InStr(A_ThisMenuItem,"undo")?0:1,u(unre)
+		undo()
+		return
+	}
+	if (A_ThisMenu="quick options")
+	tmi:=xg({settings:"//Quick_Options/" clean(A_ThisMenuItem)}),xadd("settings","Quick_Options/" clean(A_ThisMenuItem),"",bool:=tmi.text?0:1),xsave("settings")
+	if A_ThisMenu=Add
+	return ac()
+	mi:=clean(A_ThisMenuItem)
+	if IsFunc(mi)
+	%mi%(),undo()
+	return
+}
+ac(){
+	c:
+	right:=var("right"),x:=right.x,y:=right.y
+	grid(x,y,1)
+	add_control({x:x,y:y,type:A_ThisMenuItem,value:A_ThisMenuItem})
+	sleep,1
+	undo()
+	return
+}

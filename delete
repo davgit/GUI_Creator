@@ -1,7 +1,19 @@
 delete(){
-	sel:=selected_controls()
-	sel[var("right").control]:=var("right").control
-	for a,b in sel
-	remove:=xg({gui:"//*[@hwnd='" a "']"}),remove.parentnode.removechild(remove),checkmove(a,-500,-500,0,0)
-	selected_controls({}),showhighlight()
+	right:=var("right")
+	if selected_controls().minindex()
+	MsgBox,4,Delete Controls,Delete all selected controls?`nTo avoid this message press Delete or Backspace to delete all selected controls
+	IfMsgBox Yes
+	for a,b in selected_controls()
+	remove:=xg({gui:"//*[@hwnd='" a "']"}),remove.parentnode.removechild(remove)
+	else
+	remove:=xg({gui:"//*[@hwnd='" right.control "']"}),remove.parentnode.removechild(remove)
+	load(xget("gui"))
+	undo()
+	return
+	delete:
+	for a,b in selected_controls()
+	remove:=xg({gui:"//*[@hwnd='" a "']"}),remove.parentnode.removechild(remove)
+	load(xget("gui"))
+	undo()
+	return
 }

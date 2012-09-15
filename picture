@@ -1,0 +1,24 @@
+picture(x="",y=""){
+	FileSelectFile,Picture,,,Select a picture to use
+	if ErrorLevel
+	return
+	if !x
+	return picture
+	Gui,97:Destroy
+	Gui,97:+hwndpic
+	Gui,97:Add,Picture,hwndphwnd,%picture%
+	Gui,97:show,Hide
+	g:=getconpos(phwnd)
+	Gui,97:Destroy
+	Gui,45:Default
+	Gui,45:ListView,SysListView322
+	Loop,% LV_GetCount()
+	{
+		LV_GetText(info,A_Index,2)
+		if InStr(info,"Control width")
+		LV_Modify(A_Index,"",g.w,info)
+		if InStr(info,"Control height")
+		LV_Modify(A_Index,"",g.h,info)
+	}
+	LV_Modify(LV_GetNext(),"",picture,y)
+}

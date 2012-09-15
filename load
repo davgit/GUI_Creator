@@ -3,25 +3,29 @@ load(load=""){
 	FileSelectFile,load,,,,*.xml
 	if ErrorLevel
 	return
-	reset(),gui(2),xadd("settings","lastopen",{file:load}),xsave("settings")
-	xml("temp","gui",load),con:=xget("temp"),font:=sn(con,"//@type/..")
+	if IsObject(load)
+	con:=load,xml({remove:"gui"}),gui(2)
+	else
+	reset(),gui(2),xadd("settings","lastopen",{file:load}),xsave("settings"),xml("temp","gui",load),con:=xget("temp")
+	font:=sn(con,"//*[@hwnd]")
 	show:=ssn(con,"//show"),x:=xg({gui:"//show"})
 	e:=easyatt(show)
 	for a,b in e
 	%a%:=b
-	if x
+	if !(x&&y&&w&&h)
+	return
 	Gui,Show,x%x% y%y% w%w% h%h% hide
 	if !font.length
-	return m("I am sorry but this file is not formatted properly")
+	return m("I am sorry but this file is not formatted properly"),new()
 	while,control:=font.item[A_Index-1]{
 		pos:=easyatt(control)
-		a:=adjust(pos.x,pos.y)
-		pos.x:=a.x,pos.y:=a.y
 		add_control(pos)
 	}
 	x:=xg({gui:"//show"})
 	for a,b in allattributes("temp","//show")
 	x.SetAttribute(a,b)
 	Gui,Show
+	if !IsObject(load)
 	undo()
+	WinSetTitle,% hwnd([1]),,% "GUI Creator (Right click for menu) : " xg({settings:"//lastopen/@file"}).text
 }

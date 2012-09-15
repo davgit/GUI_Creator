@@ -1,17 +1,13 @@
 lbutton(){
-	lbutton:
-	MouseGetPos,x,y,win,con,2
+	LButton:
+	MouseGetPos,x,y,win,Con,2
+	married(con),control:=[]
 	sleep,1
-	if (InStr(Control,"tab")||con="")
-	MouseClick,Left
-	married(con),Control:=[]
-	if (win!=hwnd(1)){
-		MouseClick,Left
-		return
-	}
+	win+=0
+	if (win!=hwnd(1))
+	return
 	if !con
 	return select()
-	Sleep,10
 	while,GetKeyState("LButton","P"){
 		MouseGetPos,xx,yy
 		if (Abs(x-xx)>2||Abs(y-yy)>2)

@@ -1,0 +1,3 @@
+control_borders(){
+	load(xget("gui"))
+}

@@ -20,7 +20,7 @@ align_horizontally(){
 }
 align_selected_to_grid(){
 	for a,b in selected_controls()
-	p:=getconpos(a),g:=grid(p.x,p.y,1),checkmove(a,g.x,g.y)
+	p:=getconpos(a),g:=grid(p.x,p.y,2),checkmove(a,g.x,g.y)
 	showhighlight()
 }
 posinfo(){

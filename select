@@ -1,5 +1,5 @@
 select(){
-	p:=var("pos"),ins:=[],sel:=[]
+	p:=var("pos"),ins:=[],sel:=[],xy:=[]
 	MouseGetPos,xx,yy
 	if (xx<p.Border || yy<p.Border+p.Caption){
 		Gui,99:Destroy
@@ -7,7 +7,7 @@ select(){
 	}
 	Random,color,0xaaaaaa,0xeeeeee
 	gui,59:-caption +alwaysontop +E0x20 +hwndselect +Owner1
-	WinGetPos,wx,wy,ww,wh,% hwnd("h1")
+	WinGetPos,wx,wy,ww,wh,% hwnd([1])
 	gui,59:show,% "x" wx " y" wy " w" ww " h" wh  " noactivate hide"
 	gui,59:color,%color%
 	gui,59:show,NoActivate
@@ -18,7 +18,10 @@ select(){
 	}
 	Gui,59:Destroy
 	adjust(x,y),adjust(xx,yy)
-	ins:=inside(x,y,xx,yy)
+	xy["x",x]:=1,xy["x",xx]:=1,xy["y",y]:=1,xy["y",yy]:=1
+	if (x=""||y=""||xx=""||yy="")
+	return selected_controls({}),showhighlight()
+	ins:=inside({x:xy.x.minindex(),w:abs(x-xx),y:xy.y.minindex(),h:abs(y-yy)})
 	if GetKeyState("Control","P"){
 		new:=[]
 		sel:=selected_controls()

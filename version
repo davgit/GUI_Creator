@@ -4,8 +4,9 @@ version(){
 	SplashTextOff
 	FileRead,ver,version.txt
 	Gui,55:Destroy
-	setguifont(55)
 	Gui,55:+hwndhwnd +Resize +Owner1
+	setguifont(55)
+	hwnd(55,hwnd)
 	Gui,55:Add,Edit,w500 h500,%ver%
 	Gui,55:Add,Button,gverupdate w500,Update
 	shapeset(55,{Edit1:"wh",Button1:"yw"},hwnd)

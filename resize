@@ -19,11 +19,11 @@ resize(con,x,y){
 	}
 	showhighlight(),undo(),Redraw()
 }
-Resize_Width_to_Grid(){
+Resize_Width_to_Grid(x=""){
 	right:=var("right"),sel:=selected_controls()
 	for a,b in sel
 	g:=getconpos(a),checkmove(a,,,round(g.w,-1))
-	g:=getconpos(right.control),checkmove(right.control,,,,round(g.h,-1)),showhighlight()
+	g:=getconpos(right.control),checkmove(right.control,,,round(g.w,-1)),g:=getconpos(x),checkmove(x,,,round(g.w,-1)),showhighlight()
 }
 Resize_Height_to_Grid(){
 	right:=var("right"),sel:=selected_controls()

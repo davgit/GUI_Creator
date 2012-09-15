@@ -23,9 +23,9 @@ list_editor(list){
 	return
 	addedit:
 	num:=LV_Add("")
-	ControlFocus,SysListView321,% hwnd("h46")
+	ControlFocus,SysListView321,% hwnd([46])
 	LV_Modify(num,"focus")
-	send,{f2}
+	ControlSend,SysListView321,{f2},% hwnd([46])
 	return
 	le:
 	return
@@ -37,6 +37,7 @@ list_editor(list){
 	Gui,ListView,SysListView322
 	LV_GetText(setting,LV_GetNext(),2)
 	LV_Modify(LV_GetNext(),"",Trim(list,"|"),setting)
+	Gui,46:Destroy
 	return
 	46GuiEscape:
 	Gui,46:Destroy

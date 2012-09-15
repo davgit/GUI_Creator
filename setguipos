@@ -1,12 +1,30 @@
 setguipos(shape="",a="",b="",hwnd=""){
-	offsets:=var("offsets"),getwinpos(xx,yy,ww,hh,hwnd)
-	for a,b in offsets[A_Gui]{
-		for c,d in b
+	offsets:=var("offsets")
+	getwinpos(xx,yy,ww,hh,hwnd)
+	for a,b in offsets[A_Gui]
+	for c,d in b
+	{
 		if c in w,x
-		list.=c ww-d " "
-		else if c in h,y
-		list.=c hh-d " "
-		GuiControl,%A_Gui%:MoveDraw,%a%,%list%
-		list:=""
+		GuiControl,%A_Gui%:MoveDraw,%a%,% c ww-d
+		if c in h,y
+		GuiControl,%A_Gui%:MoveDraw,%a%,% c hh-d
 	}
+}
+shapeset(num,shape,hwnd,title=""){
+	static controls:=[]
+	Gui,%num%:Show,hide AutoSize,%title%
+	getwinpos(xx,yy,ww,hh,hwnd+0)
+	list:=getallpos(hwnd)
+	pos:=var("pos")
+	for a,b in shape
+	loop,parse,b
+	{
+		if A_LoopField in x,w
+		coord:=A_LoopField="x"?ww+pos.border+pos.border:ww
+		if A_LoopField in y,h
+		coord:=A_LoopField="y"?hh+pos.caption+pos.border:hh
+		ControlGet,con,hwnd,,%a%, ahk_id%hwnd%
+		controls[num,a,A_LoopField]:=abs(coord-list[con,A_LoopField])
+	}
+	var({offsets:controls})
 }

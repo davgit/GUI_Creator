@@ -1,0 +1,15 @@
+/* for debugging only
+dp(){
+	static b,hwnd
+	b:=xget("gui"),b.transformNodeToObject(style(),b)
+	if !hwnd(66){
+		Gui,66:+hwndh
+		hwnd(66,h)
+		Gui,66:Add,Edit,w1000 r20 hwndhwnd -Wrap,% b.xml
+		Gui,66:Show,x0 y0
+		WinActivate,% hwnd([1])
+		return
+	}
+	ControlSetText,Edit1,% b.xml,% hwnd([66])
+}
+*/

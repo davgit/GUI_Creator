@@ -1,1 +1,155 @@
-
+0.200.0.34
+Added:
+Quick Options:
+-Auto save on exit
+-Current file in title bar
+-New hotkeys
+-Quick Menu (press Ctrl-Q)
+Changed:
+-Re-Wrote the Undo/Redo, how controls are added, and cleaned up some code.
+0.200.0.33
+Fixed:
+-Flash on startup when loading GUI's.
+0.200.0.32
+Fixed:
+-Adding controls with hotkeys will properly snap to the grid.
+-Exporting files without window options was causing an issue
+-Duplicate variable definitions are flagged.
+0.200.0.31
+Added:
+-Default control sizes (set in the program settings window)
+-Change the font for menus and windows
+0.200.0.30
+(Reported by Uberi)
+Fixed:
+-Disable Lists was causing an error.  I had used a variable twice by mistake.
+0.200.0.29
+This update is more of an annoyance fixer.  I tried last time to make it so that the DDL's and Listviews would not cause popups or make drag boxes but it ended up making the window un-sizable.
+Changed:
+-Option for DropDownLists and ComboBoxes to be disabled so they do not show the associated menus when clicked. (They will not be disabled in your exported script)
+-ListViews will be -Mulit only in the GUI Creator to prevent the selection rectangle from showing up.  Changing the option -multi off and then on again will remove this (you will have to drag the control from the header then)
+0.200.0.28
+Fixed:
+-Windows will resize (Sorry TheDewd)
+-Dragging of Listviews needs to be done by the title block
+0.200.0.27
+(Suggested by Uberi before...I forgot to put it back in.)
+-Position of the Edit Controls window is saved.
+0.200.0.26
+(Suggested by Uberi)
+-Left clicking was not always selecting items (sorry)
+-Resize controls to align to the grid.
+0.200.0.25
+(Suggested by TheDewd)
+-Control widths were not snapping to the grid when snap to grid is enabled.
+-When turning on and off Control borders it will effect all of the controls (it will effect the size of listboxes and I can not prevent this.)
+0.200.0.24
+Added:
+-All of the positioning controls (center in window, center hor....)
+-Duplicate
+(Suggested by TheDewd)
+-Control+C will copy all selected controls
+-Control+V will paste the coppied controls where the mouse is.
+0.200.0.23
+Known issue:
+-Resizing window loses selected controls.
+Fixed:
+(reported by Uberi)
+-Controls with borders giving issues
+-Grid not turning on and off properly
+-Resizing controls (I hope)
+-Update controls (I hope)
+(reported by TheDewd)
+-Grid not resizing with the window.
+-Added Positioning/Snap Window to Grid (Works automatically if you have Snap to Grid turned on)
+Added:
+-If you have selected controls, pressing the arrow keys will move them.
+0.200.0.22
+Changed:
+-Edit controls window is now called Edit Controls...oops
+-Checks for duplicate variable values and highlights the controls that are duplicates
+0.200.0.21
+Fixed:
+-Pictures
+0.200.0.20
+Fixed:
+-Version number
+0.200.0.19
+Fixed:
+-Import working better
+-re-wrote quite a bit of the program, hopefully things are a bit more stalbe.
+0.200.0.18
+Changed:
+-Hopefully very little on the user's end, but the file size is a bit smaller
+-More of the settings (hopefully all of them) are getting imported and exported.
+0.200.0.17
+Fixed:
+-Import brings in colors.
+0.200.0.16
+Changed:
+-Version information and update is all a part of one window.
+0.200.0.15
+Added:
+-Redo is also Control+Y
+0.200.0.14
+Undo:
+-Undo hotkey Control+Z
+-Redo hotkey Shift+Control+Z
+0.200.0.13
+Fixed:
+-Windows that did not have options had an extra Gui, and made them unusable.
+-Updating tabs, listboxes, and a couple other controls were adding blank values.
+0.200.0.12
+Fixed:
+-Import will bring in window options saved by the program.
+Added:
+-GUI Numbering
+0.200.0.11
+Added:
+-Add Spaces to Output in the quick settings menu
+-Added Control Borders in quick settings
+-Added Import from Clipboard
+-Window Options
+0.200.0.10
+Fixed:
+-Duplicate also coppies all of the values
+0.200.0.9
+Changed:
+-When editing picture controls the program will pop up a fileselectfile dialog and update the sizes of the new picture to the control.
+Added:
+-Edit menu
+--Select all
+--Delete
+-File menu
+--Display program
+--New
+Moved program settings to the main menu
+0.200.0.8
+Added:
+-Offsets for adjusting the grid snap.  Goto Edit/Set Offsets to change them.
+-Remove controls, Just select the controls you do not want anymore and press either backspace, or delete. *Can not be undone*
+Removed:
+-Debug output.  I am pretty much satisified with how things are getting saved and exported.
+0.200.0.7
+Added:
+-Duplicate menu
+0.200.0.6
+Added:
+-Change the options of controls. *I have not tried all of them so some might not work or require a save and load*
+--Give them a try and let me know if I missed something
+0.200.0.5
+Testing uploads.
+0.200.0.4
+Added:
+-Version checker with auto download prompt
+0.200.0.3
+Working:
+-Load, Save, Export
+Not working:
+-Import
+0.200.0.2
+Fixed:
+-Small issue with the fonts.
+0.200.0.1
+First upload of the new GUI Creator.
+Very little working but it shows the framework.

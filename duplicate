@@ -29,7 +29,7 @@ duplicate_selected(){
 		if !sel[hwnd]
 		continue
 		ea:=easyatt(node)
-		g:=grid(ea.x+offset,0,1),adj:=adjust(g.x,ea.y),ea.x:=adj.x,ea.y:=adj.y
+		g:=grid(ea.x+offset,0,1),ea.x:=g.x
 		hwnd:=add_control(ea)
 	}
 }
@@ -53,9 +53,10 @@ paste_selected(){
 	MouseGetPos,x,y
 	else
 	x:=right.x,y:=right.y
+	grid(x,y)
 	for a,b in var("coppied"){
 		bx:=b.x,by:=b.y
-		offx:=b.x-minx+x,offy:=b.y-miny+y,grid(offx,offy),adjust(offx,offy)
+		offx:=b.x-minx+x,offy:=b.y-miny+y ;,grid(offx,offy) ;,adjust(offx,offy)
 		b.x:=offx,b.y:=offy
 		add_control(b)
 		b.x:=bx,b.y:=by

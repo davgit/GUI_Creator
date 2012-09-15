@@ -1,0 +1,17 @@
+compilepos(pos){
+	options:=sn("settings","//Quick_Options/*"),op:=[]
+	while,o:=options.item[A_Index-1]
+	op[o.nodename]:=o.Text
+	for a,b in constants("pos")
+	if pos[a]!=""
+	position.=a pos[a] " "
+	if (pos.type="ListView")
+	position.="-Multi "
+	if pos.options
+	position.=" " pos.options " "
+	if op.Control_Borders
+	position.=" Border "
+	if (op["disable_lists"]&&RegExMatch(pos.type,"i)(DropDownList|DDL|ComboBox)"))
+	position.="Disabled "
+	return position
+}

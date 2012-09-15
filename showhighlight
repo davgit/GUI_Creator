@@ -6,7 +6,7 @@ showhighlight(color=0,position=0){
 	WinSet,TransColor,0xF0F0F0 100
 	Gui,99:Color,0xF0F0F0,0xFF
 	color:=0xaaaa00,pos:=getallpos(hwnd(1))
-	WinGetPos, x1, y1, w1, h1,% hwnd("h1")
+	WinGetPos, x1, y1, w1, h1,% hwnd([1])
 	for a,b in selected_controls(){
 		if !a
 		continue

@@ -26,12 +26,8 @@ export(export=""){
 		type:=ssn(c,"@type").text,ccc:=sn(doc,"//Controls/" type "/constants/*[@value]")
 		for a,b in {ccc:ccc,cc:cc}
 		while,v:=b.item[A_Index-1],val:=ssn(v,"@value").text
-		if (val!="value"&&ssn(c,"@" val).text!=""){
-			if val in x,y
-			ad:=adjust(ssn(c,"@" val).text,ssn(c,"@" val).text),list.=val ad[val] " "
-			else
-			list.=val ssn(c,"@" val).text " "
-		}
+		if (val!="value"&&ssn(c,"@" val).text!="")
+		list.=val ssn(c,"@" val).text " "
 		o:=sn(doc,"//Controls/" type "/info/*[@value]")
 		options:=ssn(c,"@options").text
 		if InStr(type,"tab")
@@ -70,6 +66,8 @@ export(export=""){
 	FileSelectFile,filename,%over%,,Export Gui Structure as...,*.ahk
 	if ErrorLevel
 	return
+	if xg({settings:"//Add_Spaces_"}).Text?"S16":"S"
+	
 	filename:=InStr(filename,".ahk")?filename:filename ".ahk"
 	filedelete,%filename%
 	FileAppend,%total%,%filename%

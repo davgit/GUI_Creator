@@ -1,11 +1,14 @@
 edit_control(){
 	ec:
 	con:=var("right").control,c:=xg({gui:"//*[@hwnd='" con "']"})
+	if !con
+	return m("Please place the mouse over a control to edit")
 	att:=easyatt(c)
 	type:=xg({gui:"//*[@hwnd='" con "']/@type"}).text
 	menu:=xget("Constants"),m:=menu.selectnodes("//Controls/" type "/info/*[@value]")
 	rows:=m.length
 	Gui,45:Destroy
+	Gui,45:+Owner1
 	setguifont(45)
 	if rows
 	Gui,45:Add,ListView,w600 Checked r%rows%,Set|Value|Description
@@ -24,22 +27,27 @@ edit_control(){
 	Gui,45:Add,ListView,r%rows% w600 AltSubmit gecedit NoSort -ReadOnly,Value|Info
 	while,v:=mm.item[A_Index-1]{
 		in:=ssn(v,"@value").text
-		if in in x,y
-		vv:=adjust(att[in],att[in])[in]
-		else
 		vv:=att[in]
 		LV_Add("",vv,ssn(v,"@desc").text)
 	}
 	LV_ModifyCol(1,200),LV_ModifyCol(2,"autohdr")
 	Gui,Add,Button,gecu Default,Update Control
+	Gui,Add,Button,x+10 gecup,Update Selected Size
 	ecp:=xg({settings:"//EditControl"}),ecp:=easyatt(ecp),position:=""
 	for a,b in ecp
 	position.=" " a b " "
 	Gui,45:Show,% position
 	var({current:{options:m,menu:mm,atts:att,control:c,type:type}})
 	return
+	ecup:
+	gosub ecu
+	position:=var("ecpos")
+	for a,b in selected_controls()
+	GuiControl,1:MoveDraw,% a,%position%
+	showhighlight(),undo()
+	return
 	ecu:
-	m:=var("current"),values:=m.values,menu:=m.menu,type:=m.type
+	m:=var("current"),values:=m.values,menu:=m.menu,type:=m.type,c:=xg({gui:"//*[@hwnd='" var("right").control "']"})
 	toggleoptions(xg({gui:"//*[@hwnd='" var("right").control "']/@options"}).text,onoff)
 	Gui,45:Default
 	Gui,ListView,SysListView321
@@ -56,19 +64,24 @@ edit_control(){
 		name:=value
 		c.SetAttribute(val,value)
 		if val in x,y,w,h
+		if value
 		position.=val value " "
+		if val in w,h
+		if value
+		size.=val value " "
 	}
+	var({ecpos:size})
 	GuiControl,1:MoveDraw,% var("right").control,%position%
 	if type=listview
 	return update_changed_columns(var("right").control,name),undo()
-	if type in tab,ListBox
+	if type in tab,ListBox,ComboBox,DDL,DropDownList
 	{
 		GuiControl,1:,% var("right").control,|%name%
 		return undo()
 	}
 	con:=var("right").control
 	GuiControl,1:,%con%,%name%
-	undo(),Redraw()
+	undo(),showhighlight(),Redraw()
 	return
 	ecedit:
 	Gui,45:Default
@@ -76,13 +89,17 @@ edit_control(){
 	return
 	m:=var("current"),values:=m.values,menu:=m.menu,type:=m.type
 	LV_GetText(setting,LV_GetNext(),2),LV_GetText(list,LV_GetNext(),1)
-	if (type="TreeView"&&InStr(setting,"name of"))
-	return treeview(1)
-	if (RegExMatch(type,"i)(ListView|ListBox|Tab,ComboBox,DropDownList,DDL)")&&InStr(setting,"name of"))
-	return list_editor(list)
-	if (type="TreeView")
-	return treeview()
-	send,{f2}
+	if InStr(setting,"name of"){
+		if (type="TreeView")
+		return treeview(1)
+		if (RegExMatch(type,"i)(ListView|ListBox|Tab|ComboBox|DropDownList|DDL)"))
+		return list_editor(list)
+		if (type="TreeView")
+		return treeview(1)
+		if (type="Picture")
+		return picture(list,setting)
+	}
+	ControlSend,SysListView322,{f2},% hwnd([45])
 	return
 	45GuiClose:
 	45GuiEscape:

@@ -1,5 +1,4 @@
-setguifont(win){
+setguifont(x){
 	style:=easyatt(xg({settings:"//font"})),style.color:=RGB(style.color)
-	Gui,%win%:Font,% compilefont(style),% style.name
-	
+	Gui,%x%:Font,% compilefont(style),% style.name
 }

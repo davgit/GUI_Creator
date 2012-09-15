@@ -73,32 +73,10 @@ xadd(ref,path,value,text="",duplicate=""){
 	edit.text:=Text
 	return edit
 }
-guixmladd(info,tab){
-	n:=[]
-	xml:=xget("gui")
-	for a,b in info
-	if a not in tab,tabnum
-	n[a]:=b
-	if tab
-	{
-		t:=xg({gui:"//*[@hwnd='" tab "']"})
-		if !newtab:=ssn(t,"tabnum[@tab='" info.tabnum "']")
-		newtab:=xml.createelement("tabnum"),t.appendchild(newtab),newtab.setattribute("tab",info.tabnum)
-		new:=xml.createelement("control"),newtab.appendchild(new)
-		for a,b in info
-		if a!=tab
-		new.setattribute(a,b)
-		return
-	}
-	if info.type="Tab"
-	{
-		xx("gui","tab/tab",n,,{hwnd:info.hwnd})
-		return
-	}
-	if info.type="Groupbox"
-	return xx("gui","groupbox/control",n,,{hwnd:info.hwnd})
-	if !Tab
-	xx("gui","control/control",n,,{hwnd:info.hwnd})
+sn(xml,node){
+	if !IsObject(xml)
+	xml:=xget(xml)
+	return xml.selectnodes(node)
 }
 ssn(xml,node){
 	return xml.selectsinglenode(node)
@@ -141,8 +119,32 @@ xx(doc,path,value,text="",find=""){
 	last.text:=text
 	return last
 }
-sn(xml,node){
-	return xml.selectnodes(node)
+guixmladd(info,tab){
+	n:=[]
+	xml:=xget("gui")
+	for a,b in info
+	if a not in tab,tabnum
+	n[a]:=b
+	if tab
+	{
+		t:=xg({gui:"//*[@hwnd='" tab "']"})
+		if !newtab:=ssn(t,"tabnum[@tab='" info.tabnum "']")
+		newtab:=xml.createelement("tabnum"),t.appendchild(newtab),newtab.setattribute("tab",info.tabnum)
+		new:=xml.createelement("control"),newtab.appendchild(new)
+		for a,b in info
+		if a!=tab
+		new.setattribute(a,b)
+		return
+	}
+	if info.type="Tab"
+	{
+		xx("gui","tab/tab",n,,{hwnd:info.hwnd})
+		return
+	}
+	if info.type="Groupbox"
+	return xx("gui","groupbox/control",n,,{hwnd:info.hwnd})
+	if !Tab
+	xx("gui","control/control",n,,{hwnd:info.hwnd})
 }
 xsave(file=""){
 	if file{

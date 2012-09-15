@@ -1,10 +1,11 @@
-undo(reset=""){
-	static undo:=[]
-	if reset.reset
-	return undo:=[]
-	if reset.get
-	return undo
-	con:=xget("gui"),all:=getallpos(hwnd(1)),tf:=[],grp:=sn(con,"//*[@type='Groupbox']"),pos:=var("pos"),xywh:=["x","y","w","h"]
+undo(){
+	con:=xget("gui"),tf:=[],grp:=sn(con,"//*[@type='Groupbox']"),pos:=var("pos"),xywh:=["x","y","w","h"]
+	for a,b in getallpos()
+	{
+		control:=xg({gui:"//*[@hwnd='" a "']"}),pos:=easyatt(control),nh:=InStr("DropDownList|DDL|ComboBox",pos.type)
+		for c,d in p:=nh?constants("nh"):constants("pos")
+		pv:=InStr("xy",c)?adjust(b[c],b[c])[c]:b[c],Control.SetAttribute(c,pv)
+	}
 	if grp.length
 	while,cons:=grp.item[A_Index-1]
 	{
@@ -25,16 +26,9 @@ undo(reset=""){
 		if ssn(val,"@tabnum").text=ssn(con,"//*[@hwnd='" a "']").selectsinglenode("@tabnum").text
 		val.appendchild(ssn(con,"//*[@hwnd='" a "']"))
 	}
-	font:=sn(con,"//@type")
-	while,f:=font.item[A_Index-1].selectsinglenode("..")
-	for a,b in xywh
-	f.SetAttribute(b,all[ssn(f,"@hwnd").text,b])
-	winpos:=getwinpos(x,y,w,h,hwnd(1))
-	show:=ssn(con,"//gui/show")
+	winpos:=getwinpos(x,y,w,h,hwnd(1)),show:=ssn(con,"//gui/show")
 	for a,b in {x:x,y:y,w:w,h:h}
 	show.SetAttribute(a,b)
-	time:=A_Hour A_Min A_Sec A_MSec
-	if A_ThisLabel not in undo,redo
-	undo[time]:=export(1)
-	list:=sn(con,"//*[@font!='']"),flist:=[]
+	xxx:=ssn(xget("gui"),"//gui").clonenode(1),x:=xadd("undo","undo",{time:a_now},,1),x.AppendChild(xxx)
+	;dp()
 }

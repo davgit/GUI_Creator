@@ -1,0 +1,19 @@
+quick_help(){
+	nag:=xg({settings:"//Nag"}).text
+	if (nag&&A_ThisLabel="")
+	return
+	quickhelp:
+	qh=Hold down shift to resize a control
+	,`nUndo hotkey Control+z and Redo hotkey Shift+Control+z or Control+y
+	,`nHold down control while resizing to resize proportionally`nCreating Tabs and controls on those tabs works:
+	,`n1.Either right click to add the control on the current tab
+	,`n2.Your mouse must be over the tab you want the control on prior to hitting the hotkey`nSelect controls you would like to delete and press either backspace or delete.
+	,`nQuick Menu (press Ctrl-Q)
+	,`n`nShow again next run?
+	MsgBox,4,Quick Help,%qh%
+	IfMsgBox no
+	xadd("settings","Nag",0,1)
+	IfMsgBox Yes
+	xadd("settings","Nag",0,0)
+	return
+}

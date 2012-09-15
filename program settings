@@ -1,16 +1,14 @@
 program_settings(){
 	static
 	programsettings:
-	hotkey_on(1)
 	settings:=xget("settings"),fun:=constants("positioning")
 	functions:=[]
-	for a,b in constants("positioning").info
+	for a,b in {positioning:1,duplicate:1,file:1,resize:1}
+	for a,b in constants(a).info
 	functions[a]:=b
-	for a,b in constants("duplicate").info
-	functions[a]:=b
+	functions["Edit Control"]:="Edit Control"
 	Gui,60:Destroy
-	style:=easyatt(xg({settings:"//font"})),style.color:=RGB(style.color)
-	Gui,60:Font,% compilefont(style),% style.name
+	setguifont(60)
 	Gui,60:+hwndhwnd +Resize +Owner1
 	hwnd(60,hwnd)
 	Gui,60:Default
@@ -23,6 +21,7 @@ program_settings(){
 	Gui,ListView,SysListView321
 	Gui,Tab
 	Gui,Add,Button,gpsfont xm,GUI Font
+	functions.insert("Font",1)
 	for a,b in functions
 	LV_Add("",ssn(settings,"//Hotkeys/" clean(a)).text,a)
 	Gui,60:ListView,SysListView322
@@ -55,7 +54,7 @@ program_settings(){
 			remove.parentnode.removechild(remove)
 		}
 	}
-	hotkey_on(),xsave("settings")
+	gui_hotkeys(),xsave("settings")
 	Gui,60:Destroy
 	return
 	psfont:
