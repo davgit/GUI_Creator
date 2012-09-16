@@ -16,7 +16,7 @@ load(load=""){
 	return
 	Gui,Show,x%x% y%y% w%w% h%h% hide
 	if !font.length
-	return m("I am sorry but this file is not formatted properly"),new()
+	return new()
 	while,control:=font.item[A_Index-1]{
 		pos:=easyatt(control)
 		add_control(pos)

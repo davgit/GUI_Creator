@@ -1,3 +1,11 @@
+0.200.0.41
+Re-Added Preview Code (Suggested by Coco)
+Fixed: (Reported by Coco)
+-Importing GUIs with spaces in the code was causing it not to work
+-Removed the "improperly formatted" message when importing a bad file or deleting the last control
+0.200.0.40
+Fixed:
+-Nudging controls was not updating the position. (Sorry Coco)
 0.200.0.39
 Fixed:
 -Prevent like options from being selected (0x1 and 0x100)

@@ -136,7 +136,7 @@ guixmladd(info,tab){
 		new.setattribute(a,b)
 		return
 	}
-	if info.type="Tab"
+	if InStr(info.type,"Tab") ; info.type="Tab"
 	{
 		xx("gui","tab/tab",n,,{hwnd:info.hwnd})
 		return

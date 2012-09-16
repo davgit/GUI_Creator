@@ -17,6 +17,6 @@ fine(){
 	yad:=0,xad:=ad
 	for a,b in selected_controls()
 	checkmove(a,all[a].x+xad,all[a].y+yad) ;,all[a].w,all[a].h)
-	showhighlight()
+	showhighlight(),undo()
 	return
 }

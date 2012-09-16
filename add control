@@ -1,8 +1,8 @@
 add_control(pos){
 	default_size(pos.type,pos)
-	static conlist:={DateTime:"longdate",MonthCal:"",Tab:"Tab|Tab",Progress:100,TreeView:""}
-	tab:=intab(pos)
-	if (Tab&&pos.type="tab")
+	static conlist:={DateTime:"longdate",MonthCal:"",Tab:"Tab|Tab",Tab2:"Tab|Tab",Progress:100,TreeView:""}
+	tab:=intab(pos)?intab(pos):intab(pos,"Tab2")
+	if (Tab&&InStr(pos.type,"Tab"))
 	return m("You can not place tabs inside of other tabs")
 	if pos.tabnum
 	tabnum:=pos.tabnum
@@ -12,8 +12,8 @@ add_control(pos){
 		if tabnum
 		pos["tabnum"]:=tabnum
 	}
-	if pos.type="tab"
-	count:=sn(xget("gui"),"//*[@type='Tab']").length+1,pos["tn"]:=count
+	if InStr(pos.type,"Tab")
+	count:=sn(xget("gui"),"//*[@type='" pos.type "']").length+1,pos["tn"]:=count
 	value:=conlist[pos.type]?conlist[pos.type]:pos.type,value:=pos.value?pos.value:value
 	if value=Picture
 	pos.value:=value:=trim(picture())
@@ -37,3 +37,6 @@ add_control(pos){
 	if A_ThisLabel in create,c
 	u({clear:1})
 }
+f1::
+m(xget("gui").xml)
+return

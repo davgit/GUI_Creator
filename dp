@@ -1,15 +1,19 @@
-/* for debugging only
-dp(){
-	static b,hwnd
-	b:=xget("gui"),b.transformNodeToObject(style(),b)
-	if !hwnd(66){
-		Gui,66:+hwndh
-		hwnd(66,h)
-		Gui,66:Add,Edit,w1000 r20 hwndhwnd -Wrap,% b.xml
-		Gui,66:Show,x0 y0
-		WinActivate,% hwnd([1])
+Preview_Code(){
+	program:=export(1)
+	if WinExist(hwnd([66])){
+		ControlSetText,Edit1,%program%,% hwnd([66])
 		return
 	}
-	ControlSetText,Edit1,% b.xml,% hwnd([66])
+	Gui,66:Destroy
+	Gui,66:+hwndhwnd +Resize +Owner1
+	setguifont(66)
+	hwnd(66,hwnd)
+	Gui,66:Add,Edit,w500 r20 -Wrap,% program
+	shapeset(66,{Edit1:"wh"},hwnd,"Code Preview")
+	Gui,66:Show,x0 y0
+	WinActivate,% hwnd([1])
+	return
+	66GuiClose:
+	Gui,66:Destroy
+	return
 }
-*/

@@ -30,5 +30,6 @@ undo(){
 	for a,b in {x:x,y:y,w:w,h:h}
 	show.SetAttribute(a,b)
 	xxx:=ssn(xget("gui"),"//gui").clonenode(1),x:=xadd("undo","undo",{time:a_now},,1),x.AppendChild(xxx)
-	;dp()
+	if (WinExist(hwnd([66]))&&hwnd(66))
+	Preview_Code()
 }

@@ -82,7 +82,7 @@ edit_control(){
 	GuiControl,1:MoveDraw,% var("right").control,%position%
 	if type=listview
 	return update_changed_columns(var("right").control,name),undo()
-	if type in tab,ListBox,ComboBox,DDL,DropDownList
+	if type in tab,ListBox,ComboBox,DDL,DropDownList,tab2
 	{
 		GuiControl,1:,% var("right").control,|%name%
 		return undo()

@@ -6,7 +6,7 @@
 		<Auto_load_last_project>1</Auto_load_last_project>
 		<Snap_to_Grid>1</Snap_to_Grid>
 		<Control_Borders>0</Control_Borders>
-		<Add_Spaces_to_Output>0</Add_Spaces_to_Output>
+		<Add_Spaces_to_Output>1</Add_Spaces_to_Output>
 		<Disable_Lists>0</Disable_Lists>
 		<Auto_Save_On_Exit>1</Auto_Save_On_Exit>
 		<QuickHelp>1</QuickHelp>
@@ -42,5 +42,5 @@
 		<ComboBox>200 200</ComboBox>
 	</Default>
 	<font bold="0" color="8388608" italic="0" name="Segoe Print" size="8" strikeout="0" underline="0"></font>
-	<lastopen file="J:\Script Writer\project\GUI Creator\ss3.xml"></lastopen>
+	<lastopen file=""></lastopen>
 </settings>

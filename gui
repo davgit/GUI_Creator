@@ -13,7 +13,7 @@ gui(x=""){
 	OnMessage(5,"setguipos")
 	OnMessage(0x232,"snap")
 	Gui,Show,w500 h500,GUI Creator (Right click for menu)
-	hwnd(1,hwnd),hwnd(66,0)
+	hwnd(1,hwnd)
 	gui_hotkeys()
 	return
 	GuiClose:

@@ -14,11 +14,11 @@ import(program=""){
 		Loop,% Count
 		search.=",(.*)"
 		RegExMatch(A_LoopField,"O)" search,v)
-		Loop,% Count
-		if RegExMatch(v.1,"(.*):(.*)",win)
+		Loop,%Count%
+		if RegExMatch(trim(v.1),"(.*):(.*)",win)
 		number:=win1?Trim(win1):number,action:=win2
 		else if v.1
-		action:=v.1
+		action:=trim(v.1)
 		info:=v.3?trim(v.3):""
 		if InStr(action,"tab")
 		tabnum:=v.2,tab:=v.3
@@ -28,7 +28,7 @@ import(program=""){
 		else
 		font:=v.3,style:=v.2
 		if (action="add"){
-			vv:=constants("Controls")[v.2]
+			vv:=constants("Controls")[Trim(v.2)]
 			con:=doc.SelectSingleNode("//" controls[vv]),option:=attlist(con.SelectNodes("info/*/@value")),c:=attlist(con.SelectNodes("constants/*/@value")),cc:=attlist(const.SelectNodes("*/@value")),pos:=[]
 			Loop,Parse,info,%A_Space%
 			{
