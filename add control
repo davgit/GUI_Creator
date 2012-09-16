@@ -1,5 +1,5 @@
 add_control(pos){
-	default_size(pos.type,pos)
+	pos.w?"":default_size(pos.type,pos)
 	static conlist:={DateTime:"longdate",MonthCal:"",Tab:"Tab|Tab",Tab2:"Tab|Tab",Progress:100,TreeView:""}
 	tab:=intab(pos)?intab(pos):intab(pos,"Tab2")
 	if (Tab&&InStr(pos.type,"Tab"))

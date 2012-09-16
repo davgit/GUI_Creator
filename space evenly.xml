@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gui>
+	<control>
+		<control bold="0" color="0x0" font="Gabriola" h="50" hwnd="18745204" italic="0" size="16" strikeout="0" type="Button" underline="0" value="Button" w="70" x="10" y="210"></control>
+		<control bold="0" color="0x0" font="Gabriola" h="50" hwnd="12715970" italic="0" size="16" strikeout="0" type="Button" underline="0" value="Button" w="70" x="10" y="60"></control>
+		<control bold="0" color="0x0" font="Gabriola" h="50" hwnd="31786548" italic="0" size="16" strikeout="0" type="Button" underline="0" value="Button" w="70" x="10" y="160"></control>
+		<control bold="0" color="0x0" font="Gabriola" g="" h="50" hwnd="19203460" italic="0" options="" size="16" strikeout="0" type="Button" underline="0" v="" value="Button" w="70" x="10" y="10"></control>
+		<control bold="0" color="0x0" font="Gabriola" h="50" hwnd="21496964" italic="0" size="16" strikeout="0" type="Button" underline="0" value="Button" w="70" x="10" y="110"></control>
+		<control bold="0" color="0x0" font="Gabriola" h="50" hwnd="14354456" italic="0" size="16" strikeout="0" type="Button" underline="0" value="Button" w="70" x="90" y="210"></control>
+		<control bold="0" color="0x0" font="Gabriola" h="50" hwnd="5506184" italic="0" size="16" strikeout="0" type="Button" underline="0" value="Button" w="70" x="90" y="60"></control>
+		<control bold="0" color="0x0" font="Gabriola" g="" h="50" hwnd="14681210" italic="0" options="" size="16" strikeout="0" type="Button" underline="0" v="" value="asdf" w="70" x="90" y="160"></control>
+		<control bold="0" color="0x0" font="Gabriola" g="" h="50" hwnd="20579462" italic="0" options="" size="16" strikeout="0" type="Button" underline="0" v="" value="Button" w="70" x="90" y="10"></control>
+		<control bold="0" color="0x0" font="Gabriola" h="50" hwnd="13763602" italic="0" size="16" strikeout="0" type="Button" underline="0" value="Button" w="70" x="90" y="110"></control>
+		<control bold="0" color="0x0" font="Gabriola" h="50" hwnd="5703616" italic="0" size="16" strikeout="0" type="Button" underline="0" value="Button" w="70" x="170" y="210"></control>
+		<control bold="0" color="0x0" font="Gabriola" h="50" hwnd="38209226" italic="0" size="16" strikeout="0" type="Button" underline="0" value="Button" w="70" x="170" y="60"></control>
+		<control bold="0" color="0x0" font="Gabriola" h="50" hwnd="14222588" italic="0" size="16" strikeout="0" type="Button" underline="0" value="Button" w="70" x="170" y="160"></control>
+		<control bold="0" color="0x0" font="Gabriola" g="" h="50" hwnd="10356542" italic="0" options="" size="16" strikeout="0" type="Button" underline="0" v="" value="Button" w="70" x="170" y="10"></control>
+		<control bold="0" color="0x0" font="Gabriola" g="" h="50" hwnd="16057834" italic="0" options="" size="16" strikeout="0" type="Button" underline="0" v="" value="ffdsa" w="70" x="170" y="110"></control>
+		<control bold="0" color="0x0" font="Gabriola" g="" h="50" hwnd="26806090" italic="0" options="" size="16" strikeout="0" type="Button" underline="0" v="" value="Button" w="70" x="250" y="210"></control>
+		<control bold="0" color="0x0" font="Gabriola" h="50" hwnd="15271038" italic="0" size="16" strikeout="0" type="Button" underline="0" value="Button" w="70" x="250" y="60"></control>
+		<control bold="0" color="0x0" font="Gabriola" h="50" hwnd="11797836" italic="0" size="16" strikeout="0" type="Button" underline="0" value="Button" w="70" x="250" y="160"></control>
+		<control bold="0" color="0x0" font="Gabriola" g="" h="50" hwnd="9569762" italic="0" options="" size="16" strikeout="0" type="Button" underline="0" v="" value="axe" w="70" x="250" y="10"></control>
+		<control bold="0" color="0x0" font="Gabriola" h="50" hwnd="15795238" italic="0" size="16" strikeout="0" type="Button" underline="0" value="Button" w="70" x="250" y="110"></control>
+		<control h="250" hwnd="7145432" type="Picture" value="C:\Users\maestrith\Downloads\11.jpg" w="170" x="330" y="10"></control>
+		<control h="250" hwnd="16385470" type="Picture" value="C:\Users\maestrith\Downloads\6056-B.jpg" w="140" x="510" y="10"></control>
+		<control h="280" hwnd="9700738" type="Picture" value="C:\Users\maestrith\Downloads\311596_383985741656070_881809863_n.jpg" w="200" x="10" y="270"></control>
+		<control h="280" hwnd="13567512" type="Picture" value="C:\Users\maestrith\Downloads\538524_321028381303110_567860940_n.jpg" w="420" x="230" y="270" options="" v="" g=""></control>
+		<control h="540" hwnd="7471356" type="Picture" value="C:\Users\maestrith\Downloads\DSC_7060m Kopie.jpg" w="360" x="660" y="10" options="" v="" g=""></control>
+	</control>
+	<groupbox>
+	</groupbox>
+	<show h="561" w="1031" x="506" y="324"></show>
+	<tab>
+	</tab>
+</gui>
