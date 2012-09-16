@@ -17,6 +17,7 @@ add_control(pos){
 	value:=conlist[pos.type]?conlist[pos.type]:pos.type,value:=pos.value?pos.value:value
 	if value=Picture
 	pos.value:=value:=trim(picture())
+	pos.value:=pos.type!="treeview"?value:""
 	pos.type:=constants("Controls")[pos.type]
 	WinGet,bcl,ControlListHWND,% hwnd([1])
 	if tabnum

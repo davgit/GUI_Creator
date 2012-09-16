@@ -27,11 +27,14 @@ export(export=""){
 		for a,b in {ccc:ccc,cc:cc}
 		while,v:=b.item[A_Index-1],val:=ssn(v,"@value").text
 		if (val!="value"&&ssn(c,"@" val).text!="")
+		if (val="Style"&&ssn(c,"@" val).text)
+		list.=ssn(c,"@" val).text " "
+		else
 		list.=val ssn(c,"@" val).text " "
-		o:=sn(doc,"//Controls/" type "/info/*[@value]")
-		options:=ssn(c,"@options").text
 		if InStr(type,"tab")
 		count++
+		list:=Trim(list)
+		options:=ee.options?" " ee.options:""
 		total.="Gui,Add," type "," list options "," ssn(c,"@value").text "`n"
 		if type=TreeView
 		{
@@ -59,6 +62,9 @@ export(export=""){
 	total:=RegExReplace(total,"i)Gui,","Gui," number ":")
 	for a,b in glist
 	total.=a ":`nreturn`n"
+	StringReplace,total,total,`n,`r`n,All
+	if xg({settings:"//Add_Spaces_to_Output"}).Text
+	total:=RegExReplace(total,","," , ")
 	if export
 	return total
 	over:=xg({settings:"//Warn_Overwrite"}).Text?"S16":"S"
@@ -67,7 +73,6 @@ export(export=""){
 	if ErrorLevel
 	return
 	if xg({settings:"//Add_Spaces_"}).Text?"S16":"S"
-	
 	filename:=InStr(filename,".ahk")?filename:filename ".ahk"
 	filedelete,%filename%
 	FileAppend,%total%,%filename%

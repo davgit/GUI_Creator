@@ -1,5 +1,5 @@
 treeview(x=""){
 	if !x
-	return TV_Add("TreeView")
+	return v:=TV_Add("TreeView"),TV_Add("TreeView",v)
 	m("Working on a nifty way to work this out.  Stay tuned.")
 }

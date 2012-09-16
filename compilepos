@@ -11,6 +11,8 @@ compilepos(pos){
 	position.=" " pos.options " "
 	if op.Control_Borders
 	position.=" Border "
+	if pos.Style
+	position.=" " pos.style " "
 	if (op["disable_lists"]&&RegExMatch(pos.type,"i)(DropDownList|DDL|ComboBox)"))
 	position.="Disabled "
 	return position

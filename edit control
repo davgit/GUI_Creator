@@ -6,7 +6,7 @@ edit_control(){
 	att:=easyatt(c)
 	type:=xg({gui:"//*[@hwnd='" con "']/@type"}).text
 	menu:=xget("Constants"),m:=menu.selectnodes("//Controls/" type "/info/*[@value]")
-	rows:=m.length
+	rows:=m.length+1
 	Gui,45:Destroy
 	Gui,45:+Owner1
 	setguifont(45)
@@ -57,6 +57,10 @@ edit_control(){
 	options:=trim(optionlist)
 	c.SetAttribute("options",options)
 	toggleoptions(options,1),Redraw(),position:=""
+	con:=var("right").control
+	pos:=easyatt(c)
+	toggleoptions(pos.style,0)
+	redraw()
 	Gui,ListView,SysListView322
 	while,v:=menu.item[A_Index-1]{
 		LV_GetText(value,A_Index),val:=ssn(v,"@value").text
@@ -69,6 +73,8 @@ edit_control(){
 		if val in w,h
 		if value
 		size.=val value " "
+		if InStr(val,"style")
+		style:=value
 	}
 	var({ecpos:size})
 	GuiControl,1:MoveDraw,% var("right").control,%position%
@@ -80,7 +86,10 @@ edit_control(){
 		return undo()
 	}
 	con:=var("right").control
+	ss:=style
 	GuiControl,1:,%con%,%name%
+	if ss
+	GuiControl,1:%ss%,%con%
 	undo(),showhighlight(),Redraw()
 	return
 	ecedit:

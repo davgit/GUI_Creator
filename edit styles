@@ -1,0 +1,42 @@
+edit_styles(type){
+	gui:=xget("gui")
+	c:=xg({gui:"//*[@hwnd='" var("right").control "']"})
+	pos:=easyatt(c)
+	menu:=xget("Constants")
+	styles:=sn(menu,"//Controls/" type "/style/*")
+	rows:=styles.length+1
+	Gui,35:Default
+	Gui,35:Destroy
+	Gui,35:Add,ListView,w600 r%rows% Checked,On|Value|Description
+	Gui,35:Add,Button,gstyleset Default,Set style
+	while,s:=styles.item[A_Index-1]{
+		v:=easyatt(s)
+		ss:=pos.style,vv:=v.value
+		check:=(ss&vv)=vv?"Check":""
+		LV_Add(check,"",v.value,v.desc)
+	}
+	Loop,3
+	LV_ModifyCol(A_Index,"autohdr")
+	Gui,35:Show
+	return
+	styleset:
+	Gui,35:Default
+	rownumber:=0,optionlist:=0
+	SetFormat,Integer,hex
+	while,RowNumber:=LV_GetNext(RowNumber,"C")
+	lv_gettext(value,rownumber,2),optionlist+=value
+	SetFormat,Integer,dec
+	Gui,45:Default
+	Gui,45:ListView,SysListView322
+	Loop,% LV_GetCount()
+	{
+		LV_GetText(info,A_Index,2)
+		if InStr(info,"style")
+		LV_Modify(A_Index,"",optionlist,info)
+	}
+	Gui,35:Destroy
+	return
+	35GuiEscape:
+	Gui,35:Destroy
+	return
+}
