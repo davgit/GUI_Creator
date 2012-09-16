@@ -17,7 +17,9 @@ edit_control(){
 	Gui,45:Default,
 	while,v:=m.item[A_Index-1]{
 		value:=ssn(v,"@value").text
-		Check:=InStr(att.options,value)?"Check":""
+		a:=att.options,look:=RegExReplace(a," ","\b|")
+		if look
+		Check:=RegExMatch(value,look "\b")?"Check":""
 		LV_Add(check,"",value,ssn(v,"@desc").text)
 	}
 	loop,3

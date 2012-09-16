@@ -1,6 +1,7 @@
 gui(x=""){
+	;auto_version
 	if x=1
-	return ;auto_version
+	return version
 	Gui,Destroy
 	SysGet,border,32
 	SysGet,caption,4
