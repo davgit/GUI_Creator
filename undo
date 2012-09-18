@@ -4,26 +4,28 @@ undo(){
 	{
 		control:=xg({gui:"//*[@hwnd='" a "']"}),pos:=easyatt(control),nh:=InStr("DropDownList|DDL|ComboBox",pos.type)
 		for c,d in p:=nh?constants("nh"):constants("pos")
-		pv:=InStr("xy",c)?adjust(b[c],b[c])[c]:b[c],Control.SetAttribute(c,pv)
+		Control.SetAttribute(c,b[c])
 	}
 	if grp.length
 	while,cons:=grp.item[A_Index-1]
 	{
 		f:=sn(cons,"*")
+		pos:=easyatt(cons)
+		inside:=inside(pos)
 		while,incon:=f.item[A_Index-1]
 		{
-			if ssn(incon,"@tabnum")
+			if (ssn(incon,"@tabnum"))&&inside[ssn(incon,"@hwnd").text]=""
 			back:=ssn(incon,"../.."),back.appendchild(incon)
-			else if ssn(incon,"@type").text="Groupbox"
+			else if (ssn(incon,"@type").text="Groupbox"&&inside[ssn(incon,"@hwnd").text]="")
 			back:=ssn(con,"//gui/groupbox"),back.appendchild(incon)
-			else
+			else if inside[ssn(incon,"@hwnd").text]=""
 			back:=ssn(con,"/gui/" incon.nodename),back.appendchild(incon)
 		}
 	}
 	group:=sn(con,"//*[@type='Groupbox']")
 	while,val:=group.item[A_Index-1]
 	for a in inside(ssn(val,"@hwnd").text){
-		if ssn(val,"@tabnum").text=ssn(con,"//*[@hwnd='" a "']").selectsinglenode("@tabnum").text
+		if (ssn(val,"@tabnum").text=ssn(con,"//*[@hwnd='" a "']").selectsinglenode("@tabnum").text && ssn(con,"//*[@hwnd='" a "']/../@hwnd").text!=ssn(val,"@hwnd").text)
 		val.appendchild(ssn(con,"//*[@hwnd='" a "']"))
 	}
 	winpos:=getwinpos(x,y,w,h,hwnd(1)),show:=ssn(con,"//gui/show")

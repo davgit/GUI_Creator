@@ -1,0 +1,136 @@
+reorder_code(){
+	gui:=xget("gui")
+	allcon:=sn(gui,"//gui/control/control/@type/..")
+	Gui,47:Destroy
+	Gui,47:+hwndhwnd
+	hwnd(47,hwnd),setguifont(47)
+	Hotkey,IfWinActive,% hwnd([47])
+	for a,b in {up:1,down:1}
+	Hotkey,%a%,rcmv,On
+	Gui,47:Default
+	size:=xg({settings:"//font/@size"}).text
+	size:=size?size:8
+	w:=(size*1.5)*2+500
+	Gui,Add,Tab,w%w% r26,Controls outside of Groupboxes and Tabs|Groupboxes|Tabs
+	Gui,Tab,1
+	Gui,47:Add,Text,,Controls outside of Groupboxes and Tabs
+	Gui,47:Add,ListView,w500 r25 NoSort gselect AltSubmit,Control|Type|HWND
+	while,ac:=allcon.item[A_Index-1]
+	v:=easyatt(ac),LV_Add("",v.value,v.type,v.hwnd)
+	Loop,3
+	LV_ModifyCol(A_Index,"AutoHDR")
+	Gui,Tab,2
+	Gui,47:Add,Text,,Groupboxes
+	allcon:=sn(gui,"//gui/groupbox/*[@type/..]")
+	rows:=allcon.length
+	Gui,47:Add,ListView,w500 r%rows% NoSort gselect AltSubmit,Control|Type|HWND
+	while,v:=allcon.item[A_Index-1]{
+		v:=easyatt(v),LV_Add("",v.value,v.type,v.hwnd)
+		Loop,3
+		LV_ModifyCol(A_Index,"AutoHDR")
+	}
+	Gui,47:Add,Text,,% "Controls in Groupbox.`nSelect a GroupBox above to see the controls"
+	Gui,47:Add,ListView,w500 r10 NoSort gselect AltSubmit,Control|Type|HWND
+	Gui,Tab,3
+	Gui,47:Add,Text,,Tabs
+	Gui,47:Add,ListView,w500 r5 NoSort gselect  AltSubmit,Value|Type|HWND
+	Gui,Add,Text,,Tab Number
+	allcon:=sn(gui,"//gui/tab/*[@type]")
+	while,v:=allcon.item[A_Index-1]{
+		v:=easyatt(v),LV_Add("",v.value,v.type,v.hwnd)
+		Loop,3
+		LV_ModifyCol(A_Index,"AutoHDR")
+	}
+	Gui,47:Add,ListView,w500 r5 NoSortHdr Sort gselecttab AltSubmit,Tab Number
+	Gui,Add,Text,,Controls on selected Tab
+	Gui,Add,ListView,w500 r10 NoSort gselect AltSubmit,Value|Type|HWND
+	Gui,47:Show,AutoSize
+	return
+	selecttab:
+	if A_GuiEvent!=Normal
+	return
+	Gui,47:Default
+	Gui,ListView,SysListView324
+	LV_GetText(hwnd,LV_GetNext(),3)
+	Gui,ListView,SysListView325
+	LV_GetText(tab,LV_GetNext(),1)
+	GuiControl,1:Choose,%hwnd%,%tab%
+	selected_controls({}),showhighlight()
+	allcon:=sn(xget("gui"),"//*[@hwnd='" hwnd "']/*[@tab='" tab "']/*|//*[@hwnd='" hwnd "']/*[@tab='" tab "']/*/*")
+	Gui,ListView,SysListView326
+	LV_Delete()
+	while,v:=allcon.item[A_Index-1]{
+		ee:=easyatt(v)
+		LV_Add("",ee.value,ee.type,ee.hwnd)
+		Loop,3
+		LV_ModifyCol(A_Index,"AutoHDR")
+	}
+	return
+	select:
+	if A_GuiEvent not in Normal
+	return
+	ControlGetFocus,con,% hwnd([47])
+	Gui,47:Default
+	Gui,47:ListView,%con%
+	LV_GetText(hwnd,LV_GetNext(),3)
+	sel:=[]
+	x=0
+	while x:=LV_GetNext(x)
+	LV_GetText(hwnd,x,3),sel[hwnd]:=hwnd
+	selected_controls(sel),showhighlight()
+	if con=SysListView322
+	{
+		allcon:=sn(xget("gui"),"//*[@hwnd='" hwnd "']/*")
+		Gui,47:ListView,SysListView323
+		LV_Delete()
+		while,v:=allcon.item[A_Index-1]{
+			ee:=easyatt(v)
+			LV_Add("",ee.value,ee.type,ee.hwnd)
+			Loop,3
+			LV_ModifyCol(A_Index,"AutoHDR")
+		}
+	}
+	if con=SysListView324
+	{
+		allcon:=sn(xget("gui"),"//*[@hwnd='" hwnd "']/*")
+		Gui,47:ListView,SysListView325
+		LV_Delete()
+		while,v:=allcon.item[A_Index-1]{
+			ee:=easyatt(v)
+			LV_Add("",ee.tab)
+			Loop,3
+			LV_ModifyCol(A_Index,"AutoHDR")
+		}
+		Gui,47:ListView,SysListView326
+		LV_Delete()
+	}
+	return
+	47GuiEscape:
+	Gui,47:Destroy
+	return
+	rcmv:
+	ControlGetFocus,con,% hwnd([47])
+	Gui,47:Default
+	Gui,47:ListView,%con%
+	move_item(A_ThisHotkey)
+	return
+}
+move_item(direction){
+	gui:=xget("gui")
+	line:=LV_GetNext(),inc:=direction="down"?1:-1,sel:=[]
+	if (direction="up"&&line=1)||line=0
+	return
+	while x := LV_GetNext(x)
+	sel.insert(x)
+	for a,b in Sel{
+		cur:=direction="down"?sel[sel.maxindex()-a_index+1]:b,next:=cur+inc
+		if (sel[sel.maxindex()]=LV_GetCount()&&direction="down")
+		return
+		Loop,% LV_GetCount("col")
+		LV_GetText(v,cur,A_Index),LV_GetText(v1,next,A_Index),LV_Modify(cur,"Col" a_index,v1),LV_Modify(next,"Col" a_index,v)
+		LV_Modify(cur,"-select"),LV_Modify(next,"select")
+	}
+	loop,% LV_GetCount()
+	LV_GetText(hwnd,A_Index,3),ssn(gui,"//*[@hwnd='" hwnd "']..").AppendChild(ssn(gui,"//*[@hwnd='" hwnd "']"))
+	undo()
+}

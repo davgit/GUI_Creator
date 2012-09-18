@@ -35,8 +35,7 @@ list_editor(list){
 	LV_GetText(value,A_Index),list.=value "|"
 	Gui,45:Default
 	Gui,ListView,SysListView322
-	LV_GetText(setting,LV_GetNext(),2)
-	LV_Modify(LV_GetNext(),"",Trim(list,"|"),setting)
+	LV_Modify(LV_GetNext(),"Col1",Trim(list,"|"))
 	Gui,46:Destroy
 	return
 	46GuiEscape:

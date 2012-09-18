@@ -17,12 +17,13 @@
 	<Create>
 		<Button>b</Button>
 		<Checkbox>+c</Checkbox>
-		<Tab>t</Tab>
 		<Groupbox>g</Groupbox>
 		<Combobox>c</Combobox>
 		<DropDownList>d</DropDownList>
 		<ComboBox>+^c</ComboBox>
 		<Picture>p</Picture>
+		<Edit>v</Edit>
+		<Tab2>t</Tab2>
 	</Create>
 	<Hotkeys>
 		<Snap_Window_to_Grid>+s</Snap_Window_to_Grid>
@@ -41,6 +42,6 @@
 	<Default>
 		<ComboBox>200 200</ComboBox>
 	</Default>
-	<font bold="0" color="8388608" italic="0" name="Segoe Print" size="8" strikeout="0" underline="0"></font>
-	<lastopen file=""></lastopen>
+	<lastopen file="C:\Users\maestrith\Downloads\asdf.xml"></lastopen>
+	<font bold="0" color="0" italic="0" name="Arial" size="10" strikeout="0" underline="0"></font>
 </settings>

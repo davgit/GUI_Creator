@@ -1,6 +1,6 @@
 add_control(pos){
-	pos.w?"":default_size(pos.type,pos)
-	static conlist:={DateTime:"longdate",MonthCal:"",Tab:"Tab|Tab",Tab2:"Tab|Tab",Progress:100,TreeView:""}
+	pos.w?"":default_size(pos.type,pos),list:=[]
+	static conlist:={DateTime:"longdate",MonthCal:"",Tab:"Tab|Tab",Progress:100,TreeView:"",Tab2:"Tab|Tab"}
 	tab:=intab(pos)?intab(pos):intab(pos,"Tab2")
 	if (Tab&&InStr(pos.type,"Tab"))
 	return m("You can not place tabs inside of other tabs")
@@ -31,12 +31,21 @@ add_control(pos){
 	Resize_Width_to_Grid(hwnd)
 	tv:=pos.type="treeview"?TreeView():0
 	WinGet,cl,ControlListHWND,% hwnd([1])
-	married(Trim(RegExReplace(cl,bcl),"`n"))
+	married(ee(bcl,cl)) ;Trim(RegExReplace(cl,bcl),"`n")
 	pos["hwnd"]:=hwnd+0
 	guixmladd(pos,tab)
 	if A_ThisLabel in create,c
 	u({clear:1})
 }
-f1::
-m(xget("gui").xml)
-return
+ee(x,y){
+	loop,parse,y,`n
+	if !InStr(x,A_LoopField)
+	left.=A_LoopField "`n"
+	left:=left?left:y
+	return Trim(left,"`n")
+}
+
+
+
+
+

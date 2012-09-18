@@ -1,3 +1,8 @@
+0.200.0.44
+Fixed:
+-Issues with reordering code.
+0.200.0.43
+Added: Reorder Code (Suggested by Coco)
 0.200.0.42
 Fixed: (Reported by Coco)
 -Controls with Default sizes were resizing on undo.

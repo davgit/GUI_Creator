@@ -1,4 +1,4 @@
-getallpos(win=""){
+getallpos(win="",adjust=0){
 	list:=[],win:=win?win:hwnd(1)
 	WinGet,cl,ControlListhwnd,ahk_id %win%
 	Loop,Parse,cl,`n
@@ -7,6 +7,8 @@ getallpos(win=""){
 		if (con!=A_LoopField)
 		continue
 		ControlGetPos,x,y,w,h,,% "ahk_id " A_LoopField
+		if !adjust
+		adjust(x,y)
 		for a,b in {x:x,y:y,w:w,h:h,xx:x+w,yy:y+h}
 		list[con,a]:=b
 	}

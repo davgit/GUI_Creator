@@ -59,15 +59,15 @@ constants(x=""){
 	static Positioning:={info:{"Center In Window":1,"Space Evenly Horizontal":1,"Space Evenly Vertical":1,"Align Selected To Grid":1,"Center Vertically":1,"Center Horizontally":1,"Align Vertically":1,"Align Horizontally":1,"Snap Window to Grid":1}}
 	static Resize:={info:{"Resize Width to Grid":1,"Resize Height to Grid":1,"Resize Width and Height to Grid":1}}
 	static duplicate:={info:{"Copy Width":1,"Copy Height":1,"Duplicate Selected":1,"Copy Height and Width":1}}
-	static menu_edit:={info:{Undo:1,Redraw:1,Font:1,"Set Offsets":1,"Select All":1,Delete:1,Redo:1,"Paste Selected":1,"Copy Selected":1}}
+	static menu_edit:={info:{Undo:1,Redraw:1,Font:1,"Set Offsets":1,"Select All":1,Delete:1,Redo:1,"Paste Selected":1,"Copy Selected":1,"Reorder Code":1}}
 	static file:={info:{Load:1,Save:1,Export:1,Import:1,New:1,"Copy Code to Clipboard":1,"Import From Clipboard":1,"Test GUI":1,"Preview Code":1}}
 	static menu:={Add:{info:controls},"Quick_Options":quick,Positioning:positioning,Duplicate:duplicate,Edit:menu_edit,File:file,Resize:resize}
 	static Show:={info:{xCenter:"Centers the window horizontally on the screen",yCenter:"Centers the window vertically on the screen",AutoSize:"Resizes the window to accommodate only its currently visible controls",Minimize:"Minimizes the window and activates the one beneath it",Maximize:"Maximizes and activates the window",Restore:"Unminimizes or unmaximizes the window if necessary",NoActivate:"Unminimizes or unmaximizes the window if necessary",NA:"Shows the window without activating it",Hide:"Hides the window and activates the one beneath it"}
 	,constants:{SysMenu:"Omits the system menu and icon in the window's upper left corner",MaximizeBox:"Disables the maximize button in the title bar",MinimizeBox:"Disables the minimize button in the title bar",Disabled:"Disables the window, which prevents the user from interacting with its controls",Resize:"Makes the window resizable and enables its maximize button in the title bar",AlwaysOnTop:"Makes the window stay on top of all other windows",Border:"Provides a thin-line border around the window",Caption:"Remove the caption bar"}}
 	static windowoptions:={"Makes the window stay on top of all other windows":"+AlwaysOnTop","Provides a thin-line border around the window":"+Border","Remove the caption bar":"-Caption","Disables the window, which prevents the user from interacting with its controls":"+Disabled","Disables the maximize button in the title bar":"-MaximizeBox","Disables the minimize button in the title bar":"-MinimizeBox","Makes the window resizable and enables its maximize button in the title bar":"Resize","-SysMenu (minus SysMenu) to omit the system menu and icon in the window's upper left corner":"-SysMenu"}
-	static Tab2:=Tab
 	if !x
 	{
+		tab2:=tab
 		for a,b in controls
 		%a%.insert("constants",{style:"Set the style for this control"})
 		allcon:={Controls:{},Constants:{},Menu:{},Show:{}}
