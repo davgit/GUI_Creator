@@ -1,3 +1,10 @@
+0.200.0.46
+Fixed: Reported by Coco
+-Version window was displaying improperly
+code difference from list:=getallpos(hwnd) to list:=getallpos(hwnd,1) LOL
+0.200.0.45
+Added:
+-A few more hotkeys
 0.200.0.44
 Fixed:
 -Issues with reordering code.

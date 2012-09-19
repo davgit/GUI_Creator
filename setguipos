@@ -13,9 +13,10 @@ setguipos(shape="",a="",b="",hwnd=""){
 shapeset(num,shape,hwnd,title=""){
 	static controls:=[]
 	Gui,%num%:Show, AutoSize,%title%
+	Gui,%num%:Show
 	getwinpos(xx,yy,ww,hh,hwnd)
-	list:=getallpos(hwnd)
 	pos:=var("pos")
+	list:=getallpos(hwnd,1)
 	for a,b in shape
 	loop,parse,b
 	{
@@ -24,6 +25,7 @@ shapeset(num,shape,hwnd,title=""){
 		if A_LoopField in y,h
 		coord:=A_LoopField="y"?hh+pos.caption+pos.border:hh
 		ControlGet,con,hwnd,,%a%,ahk_id %hwnd%
+		gcp:=getconpos(con)
 		controls[num,a,A_LoopField]:=abs(coord-list[con,A_LoopField])
 	}
 	var({offsets:controls})

@@ -3,7 +3,7 @@ program_settings(){
 	programsettings:
 	settings:=xget("settings"),fun:=constants("positioning")
 	functions:=[]
-	for a,b in {positioning:1,duplicate:1,file:1,resize:1}
+	for a,b in {positioning:1,duplicate:1,file:1,resize:1,menu_edit:1}
 	for a,b in constants(a).info
 	functions[a]:=b
 	for a,b in {"Edit Control":1,"Quick Add":1,Undo:1,Redo:1,"Paste Selected":1,"Copy Selected":1}
